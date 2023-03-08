@@ -1,5 +1,5 @@
 <p align="center"> 
-    <img src="https://user-images.githubusercontent.com/83426602/223557502-32710a00-e4ed-4037-810b-ac7610992d3c.gif" width="550" height="350">
+    <img src="https://user-images.githubusercontent.com/83426602/223863414-55824d34-94ee-4e05-a182-00d943b0297e.gif" width="550" height="350">
 </p>
  <div align="center">
  <img src="https://img.shields.io/badge/Status-COMPLETED-green?style=for-the-badge&logo=appveyor"/>
@@ -7,7 +7,7 @@
  <img src="https://img.shields.io/static/v1?label=Grupo&message=Tupan&color=7159c1&style=for-the-badge&logo=ghost"/>
  </div>
  
-##  <strong>LAB Virtual Machine</strong>
+##  <strong>Zabbix</strong>
 
 ### Download
 
