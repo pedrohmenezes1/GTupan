@@ -144,8 +144,7 @@ Nesta máquina virtual temos 3 sabores distintos de executáveis Zabbix para rod
 
 É importante salientar que, tanto o Zabbix Server quanto o Zabbix Proxy utilizam-se do mesmo socket de rede e portanto, não podem ser inicializados ao mesmo tempo nessa máquina virtual.
 
-#### Como inicializar os serviço zabbix-agent
-##### Inciando zabbix-agent
+#### Inciando zabbix-agent:
 ```bash
 systemctl start zabbix-agent
 ```
@@ -153,7 +152,7 @@ systemctl start zabbix-agent
 #### Como inicializar o zabbix-server
 Diferente do agent, como estamos tratando do zabbix-server, precisamos então subir também o MySQL que é o banco de dados onde os dados serão armazenados.
 Em nosso caso, não é uma regra mas, o frontend está instalado no mesmo servidor. Logo, precisamos também subir o serviço “apache2”:
-##### Inciando zabbix-server
+#### Inciando zabbix-server:
 ```bash
 systemctl start zabbix-server
 ```
@@ -181,7 +180,7 @@ verdanatech
 #### Inicializar zabbix-proxy
 Embora o zabbix-proxy possa ser utilizado também com o banco de dados MySQL, optamos por usar o SQLITE3 por questões didáticas. Então, basta subir o serviço zabbix-proxy e o mesmo já possui o drive para SQLITE3 nativo, não sendo necessário nenhum outro serviço.
 
-##### Iniciando o zabbix-proxy
+#### Iniciando o zabbix-proxy:
 ```bash
 systemctl start zabbix-proxy
 ```
@@ -198,3 +197,69 @@ O Grafana está configurado para rodar em sua porta padrão. A porta 3000.
 Então, para acessá-lo, será necessário que se digite o “:3000” ao final do endereço IP do host, tal como o exemplo a seguir:
 
 ##### http://192.168.88.113:3000
+
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/83426602/223591293-3701959e-c491-44ae-adc1-06df7f04654d.png" width="700" height="450">
+</p>
+
+#### As credenciais de acesso ao Grafana são as seguintes:
+
+##### Usuário
+```bash
+admin
+```
+
+##### Senha
+```bash
+verdanatech
+```
+
+### Inicializar o SAMBA4
+
+Esta máquina virtual também está com o SAMBA4 instalado e um domínio previamente configurado.
+
+#### Para iniciar o serviço SAMA, use o seguinte comando:
+```bash
+systemctl start samba-ad-dc
+```
+
+Com isso, será levantado o serviço SAMBA que conta também com um diretório LDAP devidamente configurado para testes.
+
+Tivemos o carinho de deixar um domínio já configurado para testes e com mais de 200 usuários (todos os nomes são fictícios) criados.
+
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/83426602/223593062-99afa048-3c59-4c75-a798-af53b3c1e9df.png" width="700" height="450">
+</p>
+
+#### Os dados do domínio são os seguintes:
+##### Domínio
+```bash
+verdanadesk.local
+```
+
+##### Usuário
+```bash
+administrator
+```
+
+##### Senha
+```bash
+verdanatech@2022
+```
+
+Observações:
+
+Você pode usar o IP especial 127.0.0.1 (localhost) para configurar o serviço. Evitando assim falhas por mudança de IP em sua rede.
+
+Repare que o nome de login está em inglês e não em português.
+
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/83426602/223593478-4ad6c25d-95fe-4263-b747-3247b4d3e269.png" width="700" height="450">
+</p>
+
+
+   
+   
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/83426602/148673032-78ed82b0-7074-417d-9da5-c183eb915789.gif" width="600px"  />
+ </div>
