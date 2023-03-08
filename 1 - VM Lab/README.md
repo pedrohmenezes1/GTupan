@@ -82,10 +82,13 @@ Após a importação, basta iniciar a máquina e começar a usá-la!
 
 ### Acessando e usando a Verdanatech LAB
 A máquina virtual está com a seguinte configuração de acesso:
+##### Usuário:
 ```bash
-Usuário: root
-
-Senha: verdanatech
+root
+```
+##### Senha:
+```bash
+verdanatech
 ```
 Inicialize a máquina e então entre com estas credenciais de acesso:
 <p align="center">
@@ -95,8 +98,8 @@ Não há qualquer restrição de uso da máquina para o usuário root. Portanto,
 O acesso via SSH também está liberado por padrão!
 
 Para descobrir o endereço IP que a máquina recebeu, basta digitar o comando abaixo após se logar:
+##### Comando para listar interfaces de rede:
 ```bash
-Comando para listar interfaces de rede:
 ip ad
 ```
 <p align="center">
@@ -109,10 +112,89 @@ Neste caso, se abrirmos o terminal de comandos e digitarmos um comando de PING c
 #### Iniciando o GLPi
 O sistema GLPi trata-se de uma aplicação desenvolvida para rodar em um ambiente WEB, para tanto, o mesmo necessita de um serviço de hospedagem de página e um banco de dados MySQL/MariaDB para armazenamento de seus dados.
 Logo, execute os seguintes comandos para inicializar o sistema GLPi:
+##### Iniciando Servidor Web Apache e Banco de dados MySQL:
 ```bash
-Iniciando Servidor Web Apache e Banco de dados MySQL:
 systemctl start apache2 mysql
 ```
 <p align="center">
     <img src="https://user-images.githubusercontent.com/83426602/223587750-fde190c4-f5d6-451e-abb0-3ee3705da202.png" width="450" height="150">
 </p>
+
+Agora você conseguirá acesso ao GLPi através de uma máquina qualquer da rede usando o navegador de internet e digitando o endereço IP que a máquina recebeu em sua rede seguido de “/glpi”, tal como o exemplo a seguir:
+
+##### http://192.168.88.113/glpi
+
+Lembre-se de trocar o endereço IP pelo endereço real que sua máquina virtual recebeu.
+
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/83426602/223588236-2c400372-e31b-4eb9-9612-b60a23990633.png" width="600" height="450">
+</p>
+As credenciais de acesso ao sistema GLPi estão descritas na própria tela de login. Sinta-se a vontade para alterá-las.
+
+### Iniciando o Zabbix
+O sistema Zabbix, diferentemente do GLPi, além de possuir uma interface de configuração WEB (frontend) necessita também de um processo rodando em tempo no servidor.
+
+Nesta máquina virtual temos 3 sabores distintos de executáveis Zabbix para rodar:
+
+**Zabbix Server – reponsável pela centralização dos dados a serem exibidos no frontend do sistema**
+
+**Zabbix Proxy – responsável pela coleta de dados de um ambiente e envio para o server**
+
+**Zabbix Agent – responsável pela coleta de dados do próprio host**
+
+É importante salientar que, tanto o Zabbix Server quanto o Zabbix Proxy utilizam-se do mesmo socket de rede e portanto, não podem ser inicializados ao mesmo tempo nessa máquina virtual.
+
+#### Como inicializar os serviço zabbix-agent
+##### Inciando zabbix-agent
+```bash
+systemctl start zabbix-agent
+```
+
+#### Como inicializar o zabbix-server
+Diferente do agent, como estamos tratando do zabbix-server, precisamos então subir também o MySQL que é o banco de dados onde os dados serão armazenados.
+Em nosso caso, não é uma regra mas, o frontend está instalado no mesmo servidor. Logo, precisamos também subir o serviço “apache2”:
+##### Inciando zabbix-server
+```bash
+systemctl start zabbix-server
+```
+O aceso a interface de gerenciamento do zabbix pode ser realizada através de um navegador de internet em qualquer host da rede, bastando digitar o endereço IP da máquina virtual, seguido de “/zabbix”.
+Seguindo o exemplo de nossa rede aqui ilustrada:
+
+##### http://192.168.88.113/zabbix
+
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/83426602/223590373-3f4be925-504e-47d1-93d2-9f48916cc319.png" width="600" height="450">
+</p>
+
+##### As credenciais para acesso ao serviço Zabbix são:
+##### Usuário(Com "A" maiúsculo):
+```bash
+Admin
+```
+
+##### Senha:
+```bash
+verdanatech
+```
+##### Importante: o usuário precisa ser escrito com a letra “A” em caixa alta, tal como informado acima.
+
+#### Inicializar zabbix-proxy
+Embora o zabbix-proxy possa ser utilizado também com o banco de dados MySQL, optamos por usar o SQLITE3 por questões didáticas. Então, basta subir o serviço zabbix-proxy e o mesmo já possui o drive para SQLITE3 nativo, não sendo necessário nenhum outro serviço.
+
+##### Iniciando o zabbix-proxy
+```bash
+systemctl start zabbix-proxy
+```
+
+### Para iniciar o Grafana
+
+#### Para subir o serviço do Grafana, use o seguinte comando:
+```bash
+systemctl start grafana-server
+```
+
+O Grafana está configurado para rodar em sua porta padrão. A porta 3000.
+
+Então, para acessá-lo, será necessário que se digite o “:3000” ao final do endereço IP do host, tal como o exemplo a seguir:
+
+##### http://192.168.88.113:3000
