@@ -1,5 +1,5 @@
 <p align="center"> 
-    <img src="https://user-images.githubusercontent.com/83426602/223557502-32710a00-e4ed-4037-810b-ac7610992d3c.gif" width="550" height="350">
+    <img src="https://user-images.githubusercontent.com/83426602/223864069-4517a5ae-1c0b-4e68-b2e0-8bed01a8bc08.png" width="550" height="350">
 </p>
  <div align="center">
  <img src="https://img.shields.io/badge/Status-COMPLETED-green?style=for-the-badge&logo=appveyor"/>
@@ -51,7 +51,7 @@
 </p>
 
 ### Vídeo Tutorial
-[![image](https://user-images.githubusercontent.com/83426602/223561930-9e418a33-326c-4a13-8ae1-f7575e7b1a3c.png)](https://www.youtube.com/watch?v=nEs4Gkf1wl8)
+[![image](https://user-images.githubusercontent.com/83426602/223865567-c8f6ca91-4780-4432-883a-738aa1674f85.png)](https://youtu.be/CjclyQiP1i4)
 
 ### Passo a Passo
 
