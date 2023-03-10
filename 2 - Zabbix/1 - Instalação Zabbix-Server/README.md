@@ -7,259 +7,203 @@
  <img src="https://img.shields.io/static/v1?label=Grupo&message=Tupan&color=7159c1&style=for-the-badge&logo=ghost"/>
  </div>
  
-##  <strong>LAB Virtual Machine</strong>
-
-### Download
-
-<p align="left"><a href="https://verdanatech-my.sharepoint.com/personal/halexsandro_sales_verdanatech_com/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fhalexsandro_sales_verdanatech_com%2FDocuments%2FverdanatechLAB&ga=1">
-    <img src="https://user-images.githubusercontent.com/83426602/223574923-604f8ad4-da09-4600-b9ac-d1e1eb6a184f.png" style="width:200px;height:50px;">
-    </a></p>
-   
-<p align="left"><a href="https://www.virtualbox.org/wiki/Downloads">
-    <img src="https://user-images.githubusercontent.com/83426602/223580674-fede836f-7563-401d-a1df-b4a49e48cdeb.png" style="width:200px;height:150px;">
-    </a></p>
+##  <strong>Zabbix Serve</strong>
   
-### Sistema Operacional
+### Sistema Operacional ( Pré-Requisito )
 
 <p align="left">
-    <img src="https://user-images.githubusercontent.com/83426602/223568527-d9d1bf5f-2507-492d-a532-bb5dde85c1e3.png" width="200" height="150">
+    <img src="https://user-images.githubusercontent.com/83426602/224410906-dd15ce83-19be-46bc-8ffe-760bb8c81303.jpg" width="200" height="150">
 </p>
 
 ### Dependências
 
 | Nome             | Versão                  |
 | :-----------------| :-------------------------|
-| MySQL(MariaDB)             |  10.5.18
-| PHP           |  7.4.33
+| MySQL(MariaDB)             |  10.6.12
+| PHP           |  8.2.03
 | Apache2           |  2.4.54
-| SQLite3          |  3.34.1
 
-### Aplicações
+### Ferramentas extras
 
+| Nome             | Versão                  |
+| :-----------------| :-------------------------|
+| XZ-Utils(liblzma)             |  5.2.5
+| Bzip2           |  1.0.8
+| Unzip           |  6.0.0
+| Curl           |  7.81.0
+
+### Aplicação
 
 <p align="left">
-    <img src="https://user-images.githubusercontent.com/83426602/223567397-9a2ba37a-ef4e-4e4c-bdcf-d81fcb56fd16.png" width="100" height="50"> 10.0.5
-</p>
-<p align="left">
-    <img src="https://user-images.githubusercontent.com/83426602/223567606-8b6b35db-e967-415f-a243-6043c2b9bc5f.png" width="100" height="50"> 6.0.12
-</p>
-<p align="left">
-    <img src="https://user-images.githubusercontent.com/83426602/223567771-8da39986-328f-4137-b32c-4739c548982f.png" width="100" height="50"> 9.3.2
-</p>
-<p align="left">
-    <img src="https://user-images.githubusercontent.com/83426602/223584843-ff54e7b4-9269-4c67-b9df-68bcdb76177d.png" width="100" height="50"> 4.13.13
+    <img src="https://user-images.githubusercontent.com/83426602/224414495-96501f63-3534-4169-a0c9-21332f48a744.png" width="150" height="100">
 </p>
 
-### Vídeo Tutorial
-[![image](https://user-images.githubusercontent.com/83426602/223865567-c8f6ca91-4780-4432-883a-738aa1674f85.png)](https://youtu.be/CjclyQiP1i4)
+## Processo de instalação do Zabbix Server
 
-### Passo a Passo
+A seguir, forneceremos todos os passos necessários para a instalação do Zabbix Server em um servidor GNU/Ubuntu Server 22.04 É imprescindível que você siga à risca todos os passos e inclusive na ordem em que se encontram.
 
-Importando a VM LAB no Virtualbox
-Concluído o Download, importe a máquina virtual para o virtualbox através dos seguintes passos:
+NOTAS: Várias partes deste tutorial foram retirados diretamente do site zabbix.com e do tutorial da vernadatech cujo vídeo foi citado acima, alterando apenas as versões de algumas dependências e da própria aplicação do Zabbix.
 
-#### Passo 1
-Abra o software Virtualbox em seu computador.
+### 01 - Primeiro Passo, acessando o sistema e virando ROOT
 
-#### Passo 2
-Clique no menu “Arquivo (F)”.
+Nosso primeiro passo será entrarmos no sistema com a conta de usuário root ou, caso tenhamos entrado com outro login, nos transformar em root através do comando “su -“.
 
-#### Passo 3
-Clique agora na Opção “Importar Appliance (I)“.
-
-#### Passo 4
-Será aberta uma caixa com um ícone de diretório. Clique no mesmo, navegue pelos seus diretórios e selecione a máquina virtual baixada para que ela seja importada para o ambiente do virtualbox.
-
-<p align="center">
-    <img src="https://user-images.githubusercontent.com/83426602/223585604-661d0473-438f-405e-aaeb-37d4c217dd20.png" width="600" height="450">
+##### Virar o root (super administrador)
+```bash
+su -
+```
+<p align="center"> 
+    <img src="https://user-images.githubusercontent.com/83426602/224418147-e923c752-a78b-41b7-819b-bee05e68207f.png" width="550" height="350">
 </p>
+Certifique-se de que o símbolo ao fim do prompt tenha se transformado em uma cerquilha (#) ou, jogo da velha se preferir 😉
 
-#### Passo 5
-Clique no botão “Importar” e aguarde a conclusão.
+### 02 - Segundo Passo, preparando o ambiente
 
-#### Passo 6
-Após a importação, basta iniciar a máquina e começar a usá-la!
+Entendendo que estamos com uma máquina limpa, apenas com os pacotes básicos e que faremos apenas uma instalação básica do serviço de monitoramento Zabbix dedicada a estudos da ferramenta, faremos a instalação de todo ambiente (zabbix-server, zabbix-frontend e Banco de Dados Zabbix) na mesma máquina.
 
-### Acessando e usando a Verdanatech LAB
-A máquina virtual está com a seguinte configuração de acesso:
-##### Usuário:
+#### Instalando os repositórios
+
+#### Passo 1 - Atualizando o sistema
+
+Para evitar conflitos durante o procedimento de instalação, certifique-se de que seu sistema esteja atualizado. Isso pode ser feito usando este comando:
 ```bash
-root
+apt update && apt upgrade -y
 ```
-##### Senha:
+#### Passo 2 - Instalando dependência PHP
+
+Para instalar o PHP com sucesso, você deve instalar as dependências e, para isso, executar o comando abaixo. Essas dependências podem já existir em seu sistema, no entanto, a execução desse comando confirma sua presença.
 ```bash
-verdanatech
-```
-Inicialize a máquina e então entre com estas credenciais de acesso:
-<p align="center">
-    <img src="https://user-images.githubusercontent.com/83426602/223586441-2b6e8f5f-54a6-46b6-be1e-6b24758f58ec.png" width="600" height="450">
-</p>
-Não há qualquer restrição de uso da máquina para o usuário root. Portanto, tenha cuidado ao utilizá-lo.
-O acesso via SSH também está liberado por padrão!
-
-Para descobrir o endereço IP que a máquina recebeu, basta digitar o comando abaixo após se logar:
-##### Comando para listar interfaces de rede:
-```bash
-ip ad
-```
-<p align="center">
-    <img src="https://user-images.githubusercontent.com/83426602/223587076-4aa09c3d-c4ff-4742-bf9b-2ca1812af11f.png" width="600" height="450">
-</p>
-Repare que no exemplo acima, a interface de rede se chama “enp0s3” e o endereço de rede que a mesma pegou via DHCP foi “192.168.88.113”.
-Neste caso, se abrirmos o terminal de comandos e digitarmos um comando de PING contra este endereço, devemos receber uma resposta.
-
-### Inicializando os serviços
-#### Iniciando o GLPi
-O sistema GLPi trata-se de uma aplicação desenvolvida para rodar em um ambiente WEB, para tanto, o mesmo necessita de um serviço de hospedagem de página e um banco de dados MySQL/MariaDB para armazenamento de seus dados.
-Logo, execute os seguintes comandos para inicializar o sistema GLPi:
-##### Iniciando Servidor Web Apache e Banco de dados MySQL:
-```bash
-systemctl start apache2 mysql
-```
-<p align="center">
-    <img src="https://user-images.githubusercontent.com/83426602/223587750-fde190c4-f5d6-451e-abb0-3ee3705da202.png" width="450" height="150">
-</p>
-
-Agora você conseguirá acesso ao GLPi através de uma máquina qualquer da rede usando o navegador de internet e digitando o endereço IP que a máquina recebeu em sua rede seguido de “/glpi”, tal como o exemplo a seguir:
-
-##### http://192.168.88.113/glpi
-
-Lembre-se de trocar o endereço IP pelo endereço real que sua máquina virtual recebeu.
-
-<p align="center">
-    <img src="https://user-images.githubusercontent.com/83426602/223588236-2c400372-e31b-4eb9-9612-b60a23990633.png" width="600" height="450">
-</p>
-As credenciais de acesso ao sistema GLPi estão descritas na própria tela de login. Sinta-se a vontade para alterá-las.
-
-### Iniciando o Zabbix
-O sistema Zabbix, diferentemente do GLPi, além de possuir uma interface de configuração WEB (frontend) necessita também de um processo rodando em tempo no servidor.
-
-Nesta máquina virtual temos 3 sabores distintos de executáveis Zabbix para rodar:
-
-**Zabbix Server – reponsável pela centralização dos dados a serem exibidos no frontend do sistema**
-
-**Zabbix Proxy – responsável pela coleta de dados de um ambiente e envio para o server**
-
-**Zabbix Agent – responsável pela coleta de dados do próprio host**
-
-É importante salientar que, tanto o Zabbix Server quanto o Zabbix Proxy utilizam-se do mesmo socket de rede e portanto, não podem ser inicializados ao mesmo tempo nessa máquina virtual.
-
-#### Inciando zabbix-agent:
-```bash
-systemctl start zabbix-agent
+apt install software-properties-common apt-transport-https -y
 ```
 
-#### Como inicializar o zabbix-server
-Diferente do agent, como estamos tratando do zabbix-server, precisamos então subir também o MySQL que é o banco de dados onde os dados serão armazenados.
-Em nosso caso, não é uma regra mas, o frontend está instalado no mesmo servidor. Logo, precisamos também subir o serviço “apache2”:
-#### Inciando zabbix-server:
+#### Passo 3 - Importar repositório PPA de PHP
+
+O próximo passo é importar o repositório PPA de Ondřej Surý, que é um renomado desenvolvedor PHP e Debian e mantém seus pacotes, bem como os pacotes do Ubuntu.
 ```bash
-systemctl start zabbix-server
-```
-O aceso a interface de gerenciamento do zabbix pode ser realizada através de um navegador de internet em qualquer host da rede, bastando digitar o endereço IP da máquina virtual, seguido de “/zabbix”.
-Seguindo o exemplo de nossa rede aqui ilustrada:
-
-##### http://192.168.88.113/zabbix
-
-<p align="center">
-    <img src="https://user-images.githubusercontent.com/83426602/223590373-3f4be925-504e-47d1-93d2-9f48916cc319.png" width="600" height="450">
-</p>
-
-##### As credenciais para acesso ao serviço Zabbix são:
-##### Usuário(Com "A" maiúsculo):
-```bash
-Admin
+add-apt-repository ppa:ondrej/php -y
 ```
 
-##### Senha:
+#### Passo 4 - Importar repositório do Zabbix
+
+Algumas distribuições de SO (em particular, distribuições baseadas em Debian) fornecem seus próprios pacotes Zabbix. Observe que esses pacotes não são suportados pelo Zabbix. Os pacotes Zabbix de terceiros podem estar desatualizados e podem não ter os recursos e correções de bugs mais recentes. Recomenda-se usar apenas os pacotes oficiais do repo.zabbix.com. Se você já usou pacotes Zabbix não oficiais, consulte as notas sobre como atualizar os pacotes Zabbix dos repositórios do sistema operacional
+
+##### Instale o repositório Zabbix:
 ```bash
-verdanatech
+wget https://repo.zabbix.com/zabbix/6.4/ubuntu/pool/main/z/zabbix-release/zabbix-release_6.4-1+ubuntu22.04_all.deb
+dpkg -i zabbix-release_6.4-1+ubuntu22.04_all.deb
 ```
-##### Importante: o usuário precisa ser escrito com a letra “A” em caixa alta, tal como informado acima.
+#### Passo 5 - Atualizar o sistema novamente
 
-#### Inicializar zabbix-proxy
-Embora o zabbix-proxy possa ser utilizado também com o banco de dados MySQL, optamos por usar o SQLITE3 por questões didáticas. Então, basta subir o serviço zabbix-proxy e o mesmo já possui o drive para SQLITE3 nativo, não sendo necessário nenhum outro serviço.
-
-#### Iniciando o zabbix-proxy:
+Para buscar atualizações disponíveis nos repositórios adicionados, recomendasse atualizar o sistema novamente:
 ```bash
-systemctl start zabbix-proxy
-```
-
-### Para iniciar o Grafana
-
-#### Para subir o serviço do Grafana, use o seguinte comando:
-```bash
-systemctl start grafana-server
+apt update && apt upgrade -y
 ```
 
-O Grafana está configurado para rodar em sua porta padrão. A porta 3000.
+#### Passo 6 - Instalar pacotes necessários para o frontend (serviço web) e backend (serviço MySQL)
 
-Então, para acessá-lo, será necessário que se digite o “:3000” ao final do endereço IP do host, tal como o exemplo a seguir:
-
-##### http://192.168.88.113:3000
-
-<p align="center">
-    <img src="https://user-images.githubusercontent.com/83426602/223591293-3701959e-c491-44ae-adc1-06df7f04654d.png" width="700" height="450">
-</p>
-
-#### As credenciais de acesso ao Grafana são as seguintes:
-
-##### Usuário
+##### Apache2
 ```bash
-admin
+apt install -y apache2
 ```
 
-##### Senha
+##### PHP 8.2 + Extensões
 ```bash
-verdanatech
+apt install php8.2 libapache2-mod-php8.2
+```
+Extensões:
+```bash
+apt install php-soap php-cas php8.2-{bz2,curl,mysql,xml}
 ```
 
-### Inicializar o SAMBA4
-
-Esta máquina virtual também está com o SAMBA4 instalado e um domínio previamente configurado.
-
-#### Para iniciar o serviço SAMA, use o seguinte comando:
+Observações(Só seguir esses passos caso tenha outra versão instalada): Caso tenha uma versão anterior ativa na máquina recomendasse desativar para evitar conflitos ao subir o apache.
+Se você já tinha uma versão inferior do PHP instalada, pode mudar para 8.2 com:
 ```bash
-systemctl start samba-ad-dc
+sudo a2dismod php8.1
+```
+```bash
+sudo a2enmod php8.2
 ```
 
-Com isso, será levantado o serviço SAMBA que conta também com um diretório LDAP devidamente configurado para testes.
-
-Tivemos o carinho de deixar um domínio já configurado para testes e com mais de 200 usuários (todos os nomes são fictícios) criados.
-
-<p align="center">
-    <img src="https://user-images.githubusercontent.com/83426602/223593062-99afa048-3c59-4c75-a798-af53b3c1e9df.png" width="700" height="450">
-</p>
-
-#### Os dados do domínio são os seguintes:
-##### Domínio
+Verificar versão do PHP:
 ```bash
-verdanadesk.local
+php -v
 ```
 
-##### Usuário
+##### Ferramentas extras
 ```bash
-administrator
+apt install -y xz-utils bzip2 unzip curl snmp telnet
 ```
 
-##### Senha
+### 03 - Terceiro Passo, instale o servidor, o frontend e o agente Zabbix
+Feito os passos acima, já temos então o repositório Zabbix Oficial instalado e configurado em nosso Sistema, bastando agora, realizarmos a instalação dos pacotes do Zabbix via apt:
 ```bash
-verdanatech@2022
+apt install zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent
+```
+### 04 - Quarto Passo, Preparando o Banco de Dados
+
+#### Passo 0 - Recapitulando!
+
+Tudo que fizemos até o momento foi:
+
+Ajuste de repositórios
+Instalação do servidor web Apache com suporte a PHP
+Instalação do serviço de Banco de Dados MySQL
+e, por fim, instalação do Zabbix Server com suporte a MySQL que roda como um Daemon, Zabbix Frontedn que é a página de administração do Zabbix Server, e o Zabbix Agent que é o agente do Zabbix para monitorar o próprio servidor.
+Porém, o Servidor Zabbix é uma espécie de concentrador de Dados. Todos os Ativos e Serviços são monitorados por meio de coleta de dados e estes dados precisam ser armazenados em um Banco de Dados para serem consultados sempre que quisermos ou até mesmo para compor dados estatísticos. Outra item importante a ser dito é que as nossas parametrizações também ficam salvas neste mesmo Banco de Dados.
+
+Já temos o MySQL a essa altura configurado como serviço e rodando. Mas, chegou a hora de criarmos uma Base de Dados para o Serviço Zabbix que estamos subindo.
+
+Esta base de dados precisará de um usuário e uma senha para poder se conectar, criar e atualizar itens. Para isso, vamos então executar os seguintes comandos:
+
+#### Passo 1 - Criando Database
+```bash
+mysql> create database zabbix character set utf8mb4 collate utf8mb4_bin;
 ```
 
-Observações:
+#### Passo 2 - Criando Usuário ( Onde tem 'password' será a senha do usuário no banco )
+```bash
+mysql> create user zabbix@localhost identified by 'password';
+```
 
-Você pode usar o IP especial 127.0.0.1 (localhost) para configurar o serviço. Evitando assim falhas por mudança de IP em sua rede.
+#### Passo 3 - Adicionando privilégios ao usuário
+```bash
+mysql> grant all privileges on zabbix.* to zabbix@localhost;
+```
 
-Repare que o nome de login está em inglês e não em português.
+#### Passo 4 - Populando banco de dados ( Este passo pode demorar dependendo da máquina, "não está travado" )
+Neste passo irá pedir a senha que foi cadastrada na criação do usuário Zabbix no banco.
+```bash
+zcat /usr/share/zabbix-sql-scripts/mysql/server.sql.gz | mysql --default-character-set=utf8mb4 -uzabbix -p zabbix
+```
 
-<p align="center">
-    <img src="https://user-images.githubusercontent.com/83426602/223593478-4ad6c25d-95fe-4263-b747-3247b4d3e269.png" width="700" height="450">
-</p>
+Feito isso, já teremos o nosso banco de dados pronto e apenas aguardando a conexão do sistema Zabbix.
+
+<div align="left">
+  <img src="https://user-images.githubusercontent.com/83426602/224430797-b7614d28-7812-4eda-99c6-cecb371530c8.png" width="250"  />
+  <img src="https://user-images.githubusercontent.com/83426602/224428920-838575b4-b46a-4fa6-a373-05757cb8b86c.png" width="250px"  />
+ </div>
+
+### 05 - Quinto Passo, Configure o banco de dados para o servidor Zabbix
+
+Quando fizemos a instalação, como padrão em sistemas Unix-LIKE, foram criados arquivos de configuração dentro do diretório “/etc/zabbix”. O arquivo “/etc/zabbix/zabbix_server.conf” é o arquivo responsável pela configuração do backend zabbix, o Zabbix Server.
+
+Este arquivo é muito extenso porém, muito bem documentado também. As linhas iniciadas com o símbolo de cerquilha ( # ) ou hashtag para os mais novos, são apenas comentários e não são considerados como configuração válida para o servidor. Muitas linhas estão ali apenas para orientá-lo sobre as possibilidades de configuração.
+
+No LINK a seguir, está o Manual Oficial do Zabbix, contendo todas as opções deste arquivo de configuração:
+
+[Manual do Zabbix 6.4](https://www.zabbix.com/documentation/current/en/manual)
+
+#####  Abra o arquivo para edição
+```bash
+nano /etc/zabbix/zabbix_server.conf
+```
+Neste arquivo, procure pelo texto DBPassword. Você pode usar o atalho do editor “nano” para pesquisar: CTRL + W
+
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/83426602/224432677-53695b85-f088-4d68-9321-fc2911a78746.png" width="250"  />
+ </div>
 
 
-   
-   
 <div align="center">
   <img src="https://user-images.githubusercontent.com/83426602/148673032-78ed82b0-7074-417d-9da5-c183eb915789.gif" width="600px"  />
  </div>
