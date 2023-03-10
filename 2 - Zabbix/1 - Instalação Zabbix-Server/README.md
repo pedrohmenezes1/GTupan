@@ -200,9 +200,103 @@ nano /etc/zabbix/zabbix_server.conf
 Neste arquivo, procure pelo texto DBPassword. Você pode usar o atalho do editor “nano” para pesquisar: CTRL + W
 
 <div align="center">
-  <img src="https://user-images.githubusercontent.com/83426602/224432677-53695b85-f088-4d68-9321-fc2911a78746.png" width="250"  />
+  <img src="https://user-images.githubusercontent.com/83426602/224432677-53695b85-f088-4d68-9321-fc2911a78746.png" width="550"  />
+ </div>
+Remova a cerquilha ( # ) do início da linha e, após o sinal de igualdade ( = ) adicione a senha que foi criada na criação do usuário Zabix no banco.
+
+##### Reinicia o serviço Zabbix já com as novas configurações
+```bash
+systemctl restart zabbix-server
+```
+
+##### Configurando os serviços para que seja iniciado com o boot da máquina
+```bash
+# systemctl enable zabbix-server zabbix-agent apache2
+```
+
+### 06 - Sexto Passo, Finalizando a instalação pela interface Web
+
+Agora, nosso objetivo avança para cima do frontend. Precisamos acessá-lo e finalizar a configuração.
+
+Precisamos saber qual o endereço do nosso servidor neste momento. Para isso, podemos usar o seguinte comando:
+```bash
+hostname -I
+```
+
+Agora que já sabe qual o endereço IP está usando no seu Servidor, você pode acessá-lo a partir do navegador de sua preferência, no conforto de seu Desktop.
+
+Use o endereço baseado no exemplo a seguir:
+
+##### http://ENDEREÇO_IP/zabbix
+
+Você será redirecionado para a tela de setup do Zabbix Frontend, onde o processo de configuração é bem simples apenas com next, lembrar de selecionar a linguagem para português.
+
+
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/83426602/224435710-c0f901de-2f2c-408f-82e7-fd3a1fdb618a.png" width="600px"  />
  </div>
 
+Agora, o sistema fará uma análise para validar que todos os requisitos foram perfeitamente atendidos. Claro que, se você seguiu todos os passos até este momento, estará tudo em ordem. Basta clicar em “Próximo”.
+
+Caso tenha algum requisito não atendido, retorne todo o processo e analise passo a passo o que pode ter passado. Se estiver começando a aprender Linux e/ou Zabbix, sugerimos que exclua seu projeto e comece do Zero com bastante atenção para não deixar nada passar. Te garantimos que, se seguir à risca todos os passos, não terá problema.
+
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/83426602/224435895-3e760057-db85-4528-a7f7-f1607c85edad.png" width="600px"  />
+ </div>
+ 
+Na próxima tela, o Zabbix Frontend solicita que sejam fornecidos os dados de conexão com o Banco de Dados a ser utilizado. Sim! Aqueles dados lá do início. É justamente pelo Banco de Dados que o Zabbix Backend e o Zabbix Frontend “trocam figurinhas”!
+
+Insira então os dados conforme segue:
+
+Tipo de Banco de Dados: MySQL
+Servidor de Banco de Dados: localhost
+Porta do Banco de Dados: 0
+Nome do Banco de dados: zabbix
+Usuário: zabbix
+Senha: 
+
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/83426602/224436063-26aa6d95-671b-4620-b08f-c6987e3b733c.png" width="600px"  />
+ </div>
+ 
+Na próxima página, serão solicitados detalhes sobre o “Zabbix Server”. Você pode simplesmente deixar como está e clicar em “Próximo”.
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/83426602/224436184-e0b99b25-344c-4114-9760-44dd385db299.png" width="600px"  />
+ </div>
+
+Agora, uma tela com todo o sumário da instalação será exibida. Estando tudo certo, apenas clique em “Próximo”.
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/83426602/224436336-b9997ccf-762c-45f6-8bfb-d825c93fb1e1.png" width="600px"  />
+ </div>
+
+Finalmente, uma mensagem de “Felicitações” é exibida para nós confirmando que o Zabbix Frontend foi configurado com sucesso.
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/83426602/224436499-4680d156-9918-4baf-a4b6-79d4ea531555.png" width="600px"  />
+ </div>
+
+ Para nossa alegria, a tão sonhada tela de Login é finalmente exibida.
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/83426602/224436732-d6c10ae3-f80f-48d6-9b91-06645bbfd252.png" width="600px"  />
+ </div>
+ 
+ #### O primeiro Login no Zabbix Frontend
+ 
+Quando criamos a base de dados Zabbix, o script se incumbiu de criar um usuário administrador para nós.
+
+As credenciais de acesso são:
+##### Usuário(Com "A" em caixa alta):
+```bash
+Admin
+```
+##### Senha:
+```bash
+zabbix
+```
+
+Esta é a credencial padrão do Zabbix ao ser instalado. É importante ressaltar que o login Admin é com o A maiúsculo e não minúsculo.
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/83426602/224437309-4ac2829b-9ab4-4338-b405-2d2b86b406b0.png" width="600px"  />
+ </div>
 
 <div align="center">
   <img src="https://user-images.githubusercontent.com/83426602/148673032-78ed82b0-7074-417d-9da5-c183eb915789.gif" width="600px"  />
