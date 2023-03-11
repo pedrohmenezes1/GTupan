@@ -7,7 +7,7 @@
  <img src="https://img.shields.io/static/v1?label=Grupo&message=Tupan&color=7159c1&style=for-the-badge&logo=ghost"/>
  </div>
  
-##  <strong>LAB Virtual Machine</strong>
+#  <strong>Grafana</strong>
 
 ### Download
 
