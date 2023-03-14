@@ -1,5 +1,5 @@
 <p align="center"> 
-    <img src="https://user-images.githubusercontent.com/83426602/223864069-4517a5ae-1c0b-4e68-b2e0-8bed01a8bc08.png" width="550" height="350">
+    <img src="https://user-images.githubusercontent.com/83426602/224881724-5079869d-d981-4344-a2c4-79fbb128b9d4.jpg" width="550" height="350">
 </p>
  <div align="center">
  <img src="https://img.shields.io/badge/Status-COMPLETED-green?style=for-the-badge&logo=appveyor"/>
@@ -7,7 +7,7 @@
  <img src="https://img.shields.io/static/v1?label=Grupo&message=Tupan&color=7159c1&style=for-the-badge&logo=ghost"/>
  </div>
  
-#  <strong>Zabbix Serve</strong>
+#  <strong>GLPI 10</strong>
   
 ### Sistema Operacional ( Pré-Requisito )
 
@@ -23,28 +23,33 @@
 | PHP           |  8.2.03
 | Apache2           |  2.4.54
 
-### Ferramentas extras
+### Extensões
 
-| Nome             | Versão                  |
-| :-----------------| :-------------------------|
-| XZ-Utils(liblzma)             |  5.2.5
-| Bzip2           |  1.0.8
-| Unzip           |  6.0.0
-| Curl           |  7.81.0
+| Nome             | 
+| :----------------|
+| PHP-Curl         |
+| PHP-Gd           |  
+| PHP-Cli          | 
+| PHP-Mbstring     |
+| PHP-Mysql        |
+| PHP-Xml          |
+| PHP-Ldap         |
+| PHP-Openssl      |
+| PHP-Intl         |
+| PHP-Zip          |
+| PHP-Bz2          |
 
 ### Aplicação
 
 <p align="left">
-    <img src="https://user-images.githubusercontent.com/83426602/224414495-96501f63-3534-4169-a0c9-21332f48a744.png" width="150" height="100">
+    <img src="https://user-images.githubusercontent.com/83426602/224883177-a6278f90-94d1-4fb7-994d-37693119739e.png" width="150" height="100">
 </p>
 
-## Processo de instalação do Zabbix Server
+## Processo de instalação do GLPI 10
 
-A seguir, forneceremos todos os passos necessários para a instalação do Zabbix Server em um servidor GNU/Ubuntu Server 22.04 É imprescindível que você siga à risca todos os passos e inclusive na ordem em que se encontram.
+Abaixo são dispostos os comandos necessários para instalar o GLPi 10 em um Servidor GNU/Linux Ubuntu ] 22.04 .
 
-NOTAS: Várias partes deste tutorial foram retirados diretamente do site zabbix.com e do tutorial da vernadatech cujo vídeo foi citado acima, alterando apenas as versões de algumas dependências e da própria aplicação do Zabbix.
-
-### 01 - Primeiro Passo, acessando o sistema e virando ROOT
+### 01 - Acessando o sistema e virando ROOT
 
 Nosso primeiro passo será entrarmos no sistema com a conta de usuário root ou, caso tenhamos entrado com outro login, nos transformar em root através do comando “su -“.
 
@@ -57,9 +62,41 @@ su -
 </p>
 Certifique-se de que o símbolo ao fim do prompt tenha se transformado em uma cerquilha (#) ou, jogo da velha se preferir 😉
 
-### 02 - Segundo Passo, preparando o ambiente
+### 02 - Ajustando fuso horário
 
-Entendendo que estamos com uma máquina limpa, apenas com os pacotes básicos e que faremos apenas uma instalação básica do serviço de monitoramento Zabbix dedicada a estudos da ferramenta, faremos a instalação de todo ambiente (zabbix-server, zabbix-frontend e Banco de Dados Zabbix) na mesma máquina.
+Desde a versão 9.5, o GLPi finalmente traz a possibilidade de podermos trabalhar com diferentes fusos na Central de Serviços.
+
+Essa era uma funcionalidade há muito esperada por Centrais de Serviços de médio e grande porte que atendem Clientes geograficamente espalhados.
+
+Aqui vão alguns comandos de ajuste geral para isso:
+
+##### Removendo pacotes NTP
+```bash
+apt purge ntp
+```
+##### Instalar pacotes OpenNTPD
+```bash
+apt install -y openntpd
+```
+##### Parando Serviço OpenNTPD
+```bash
+service openntpd stop
+```
+##### Configurar Timezone padrão do Servidor
+```bash
+dpkg-reconfigure tzdata
+```
+##### Adicionar servidor NTP.BR
+```bash
+echo "servers pool.ntp.br" > /etc/openntpd/ntpd.conf
+```
+##### Habilitar e Iniciar Serviço OpenNTPD
+```bash
+systemctl enable openntpd
+systemctl start openntpd
+```
+
+
 
 #### Instalando os repositórios
 
