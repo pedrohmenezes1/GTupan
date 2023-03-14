@@ -284,9 +284,9 @@ Os passos a são relativamente intuitivos, com exceção da configuração da co
 
 ![image](https://user-images.githubusercontent.com/83426602/224930992-98785580-9410-4b0e-a419-655bffd3d482.png)
 
-
-
-
+### 07 - Instalação concluída 
+Bem vindo a nova página de autenticação do sistema.
+![image](https://user-images.githubusercontent.com/83426602/224932182-dc0d5cc6-8b4b-4b3e-8aac-eada47f24fe9.png)
 
 
 <div align="center">
