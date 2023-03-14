@@ -18,8 +18,8 @@ https://github.com/pedrohmenezes1/GTupan/tree/master/1%20-%20VM%20Lab
 
 <div align="center">
 <a href="https://github.com/pedrohmenezes1">
- <img height="180em" src="https://github-readme-stats.vercel.app/api?username=pedrohmenezes1&show_icons=true&theme=dracula&include_all_commits=true&count_private=true"/>
- <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=pedrohmenezes1&layout=compact&langs_count=7&theme=dracula"/>
+ <img height="160em" src="https://github-readme-stats.vercel.app/api?username=pedrohmenezes1&show_icons=true&theme=dracula&include_all_commits=true&count_private=true"/>
+ <img height="160em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=pedrohmenezes1&layout=compact&langs_count=7&theme=dracula"/>
 </div>
 
 
