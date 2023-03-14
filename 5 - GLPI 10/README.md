@@ -1,13 +1,13 @@
 <p align="center"> 
-    <img src="https://user-images.githubusercontent.com/83426602/223557502-32710a00-e4ed-4037-810b-ac7610992d3c.gif" width="550" height="350">
+    <img src="https://user-images.githubusercontent.com/83426602/224879254-208e341b-cf75-4b79-893e-06033057734b.gif" width="550" height="350">
 </p>
  <div align="center">
- <img src="https://img.shields.io/badge/Status-COMPLETED-green?style=for-the-badge&logo=appveyor"/>
+ <img src="https://img.shields.io/badge/Status-CONSTRUCTION-yellow?style=for-the-badge&logo=appveyor"/>
  <img src="https://img.shields.io/badge/Licence-GNU-blue?style=for-the-badge&logo=appveyor"/>
  <img src="https://img.shields.io/static/v1?label=Grupo&message=Tupan&color=7159c1&style=for-the-badge&logo=ghost"/>
  </div>
  
-##  <strong>LAB Virtual Machine</strong>
+#  <strong>GLPI 10</strong>
 
 ### Download
 
