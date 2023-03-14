@@ -54,7 +54,7 @@ Abaixo são dispostos os comandos necessários para instalar o GLPi 10 em um Ser
 Nosso primeiro passo será entrarmos no sistema com a conta de usuário root ou, caso tenhamos entrado com outro login, nos transformar em root através do comando “su -“.
 
 ##### Virar o root (super administrador)
-```bash
+```shell
 su -
 ```
 <p align="center"> 
@@ -71,27 +71,27 @@ Essa era uma funcionalidade há muito esperada por Centrais de Serviços de méd
 Aqui vão alguns comandos de ajuste geral para isso:
 
 ##### Removendo pacotes NTP
-```bash
+```shell
 apt purge ntp
 ```
 ##### Instalar pacotes OpenNTPD
-```bash
+```shell
 apt install -y openntpd
 ```
 ##### Parando Serviço OpenNTPD
-```bash
+```shell
 service openntpd stop
 ```
 ##### Configurar Timezone padrão do Servidor
-```bash
+```shell
 dpkg-reconfigure tzdata
 ```
 ##### Adicionar servidor NTP.BR
-```bash
+```shell
 echo "servers pool.ntp.br" > /etc/openntpd/ntpd.conf
 ```
 ##### Habilitar e Iniciar Serviço OpenNTPD
-```bash
+```shell
 systemctl enable openntpd
 systemctl start openntpd
 ```
@@ -104,19 +104,19 @@ systemctl start openntpd
 
 #### Passo 1 - Atualizando o sistema
 Para evitar conflitos durante o procedimento de instalação, certifique-se de que seu sistema esteja atualizado. Isso pode ser feito usando este comando:
-```bash
+```shell
 apt update && apt upgrade -y
 ```
 
 #### Passo 2 - Instalando dependência PHP
 Para instalar o PHP com sucesso, você deve instalar as dependências e, para isso, executar o comando abaixo. Essas dependências podem já existir em seu sistema, no entanto, a execução desse comando confirma sua presença.
-```bash
+```shell
 apt install software-properties-common apt-transport-https -y
 ```
 
 #### Passo 3 - Importar repositório PPA de PHP
 O próximo passo é importar o repositório PPA de Ondřej Surý, que é um renomado desenvolvedor PHP e Debian e mantém seus pacotes, bem como os pacotes do Ubuntu.
-```bash
+```shell
 add-apt-repository ppa:ondrej/php -y
 ```
 
@@ -124,13 +124,13 @@ add-apt-repository ppa:ondrej/php -y
 Como já sabemos, o GLPi trata-se de uma ferramenta WEB. Podemos vê-lo simplesmente como um site a ser instalado. Portanto, precisamos montar um ambiente WEB para tal funcionalidade.
 Existem várias opções de serviço WEB a ser utilizada em ambientes GNU/Linux. Utilizaremos o servidor WEB Apache.
 Para habilitar o serviço Apache, basta seguir o comando abaixo:
-```bash
+```shell
 apt install -y apache2 libapache2-mod-php php-soap php-cas php php-{apcu,cli,common,curl,gd,imap,ldap,mysql,xmlrpc,xml,mbstring,bcmath,intl,zip,redis,bz2}
 ```
 
 #### Passo 5 - Atualizar o sistema novamente
 Para buscar atualizações disponíveis nos repositórios adicionados, recomendasse atualizar o sistema novamente:
-```bash
+```shell
 apt update && apt upgrade -y
 ```
 Repare que, ao invés de termos de ficar repetindo “php7-moduloX” para cada módulo do PHP, usamos um recurso do shell usando todo conteúdo dentro do par de “chaves” ({ }). Isso cria um vetor com os valores dentro das chaves para que não tenhamos de ficar digitando tudo. Pois é, tem coisas que só o shell faz para nós!
@@ -143,177 +143,151 @@ Ao fim deste comando, teremos um servidor WEB instalado já com suporte a lingua
 
 #### Passo 1 - Entre na pasta /tmp
 Feito os passos acima, já temos então o ambiente pronto para instalar o GLPI 10, entre na pasta /tmp para fazer o download e a instalação do GLPI
-```bash
+```shell
 cd /tmp
 ```
 
 #### Passo 2 - Faça o download da última versão do GLPI
 As versões podem ser vistas no link [GLPI](https://github.com/glpi-project/glpi/releases/), basta apenas copiar o link da última versão e colar após o comando wget, por exemplo:
-```bash
+```shell
 wget https://github.com/glpi-project/glpi/releases/tag/10.0.6
 ```
 
 #### Passo 3 - Extrair o arquivo
 Após baixar o GLPI, extraia com o seguinte comando:
-```bash
+```shell
 tar -xvzf glpi-10.0.0-rc1.tgz
 ```
 
 #### Passo 4 - Copiar para a pasta HTML
-```bash
+```shell
 cp -Rf glpi /var/www/html
 ```
 
 #### Passo 5 - Adicionando permissões para a pasta do GLPI
-```bash
-chmod 775 /var/www/html/* -Rf
+```shell
 chown www-data. /var/www/html/* -Rf
+find /var/www/html/glpi -type d -exec chmod 755 {} \;
+find /var/www/html/glpi -type f -exec chmod 644 {} \;
 ```
 
 ### 04 Preparando o Banco de Dados
 
 #### Passo 1 - Criando Database
-```bash
+```shell
 mysql> create database glpi10 character set utf8mb4 collate utf8mb4_bin;
 ```
 
 #### Passo 2 - Criando Usuário ( Onde tem 'password' será a senha do usuário no banco )
-```bash
-mysql> create user zabbix@localhost identified by 'password';
+```shell
+mysql> create user glpi@localhost identified by 'password';
 ```
 
 #### Passo 3 - Adicionando privilégios ao usuário
-```bash
-mysql> grant all privileges on zabbix.* to zabbix@localhost;
+```shell
+mysql> grant all privileges on glpi10.* to glpi@localhost;
 ```
 
-#### Passo 4 - Populando banco de dados ( Este passo pode demorar dependendo da máquina, "não está travado" )
-Neste passo irá pedir a senha que foi cadastrada na criação do usuário Zabbix no banco.
-```bash
-zcat /usr/share/zabbix-sql-scripts/mysql/server.sql.gz | mysql --default-character-set=utf8mb4 -uzabbix -p zabbix
+#### Passo 4 - Configurando fuso horário no banco
+##### Você terá que inicializar os dados dos fusos horários do seu sistema, para isso, execute o seguinte comando com o usuário root do MariaDB:
+```shell
+mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -p -u root mysql
+```
+##### Permitir acesso limitado do usuário do banco de dados à tabela de fusos horários
+```shell
+mysql -u root -p
+GRANT SELECT ON `mysql`.`time_zone_name` TO 'glpi'@'localhost';
+FLUSH PRIVILEGES;
+```
+##### Migrando
+```shell
+php /var/www/html/glpi/bin/console glpi:migration:timestamps
+```
+##### Ativando timeszones
+```shell
+php /var/www/html/glpi/bin/console database:enable_timezones 
+```
+Feito isso, já teremos o nosso banco de dados pronto e apenas aguardando a conexão do sistema Glpi.
+
+### 05 - Resolvendo Problema de Acesso WEB ao Diretório
+Um ajuste que muitos deixam de fazer é com relação a permissão de acesso ao diretório WEB. Isso pode ser resolvido de forma simples com uma pequeno arquivo de configuração.
+Para criar o arquivo e habilitar a configuração, basta executar os comandos a seguir:
+
+#### Passo 1 - Desabilitar a configuração padrão do Apache
+```shell
+a2dissite 000-default
 ```
 
-Feito isso, já teremos o nosso banco de dados pronto e apenas aguardando a conexão do sistema Zabbix.
-
-<div align="left">
-  <img src="https://user-images.githubusercontent.com/83426602/224430797-b7614d28-7812-4eda-99c6-cecb371530c8.png" width="250"  />
-  <img src="https://user-images.githubusercontent.com/83426602/224428920-838575b4-b46a-4fa6-a373-05757cb8b86c.png" width="250px"  />
- </div>
-
-### 05 - Quinto Passo, Configure o banco de dados para o servidor Zabbix
-
-Quando fizemos a instalação, como padrão em sistemas Unix-LIKE, foram criados arquivos de configuração dentro do diretório “/etc/zabbix”. O arquivo “/etc/zabbix/zabbix_server.conf” é o arquivo responsável pela configuração do backend zabbix, o Zabbix Server.
-
-Este arquivo é muito extenso porém, muito bem documentado também. As linhas iniciadas com o símbolo de cerquilha ( # ) ou hashtag para os mais novos, são apenas comentários e não são considerados como configuração válida para o servidor. Muitas linhas estão ali apenas para orientá-lo sobre as possibilidades de configuração.
-
-No LINK a seguir, está o Manual Oficial do Zabbix, contendo todas as opções deste arquivo de configuração:
-
-[Manual do Zabbix 6.4](https://www.zabbix.com/documentation/current/en/manual)
-
-#####  Abra o arquivo para edição
-```bash
-nano /etc/zabbix/zabbix_server.conf
+#### Passo 2 - Criar um novo arquivo de configuração para o GLPi:
+```shell
+nano /etc/apache2/sites-available/glpi.conf
 ```
-Neste arquivo, procure pelo texto DBPassword. Você pode usar o atalho do editor “nano” para pesquisar: CTRL + W
+##### Adicionar os seguintes comandos no arquivo:
+```shell
+<VirtualHost glpi:80>
+ServerAdmin admin@example.com
+DocumentRoot /var/www/html/glpi
+ServerName example.com
+ServerAlias www.example.com
+<Directory /var/www/html/glpi/>
+Options +FollowSymlinks
+AllowOverride All
+Require all granted
+</Directory>
+ErrorLog ${APACHE_LOG_DIR}/error.log
+CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+```
+Salvar e fechar
 
-<div align="center">
-  <img src="https://user-images.githubusercontent.com/83426602/224432677-53695b85-f088-4d68-9321-fc2911a78746.png" width="550"  />
- </div>
-Remova a cerquilha ( # ) do início da linha e, após o sinal de igualdade ( = ) adicione a senha que foi criada na criação do usuário Zabix no banco.
-
-##### Reinicia o serviço Zabbix já com as novas configurações
-```bash
-systemctl restart zabbix-server
+#### Passo 3 - Habilitar a configuração criada
+```shell
+sudo a2ensite glpi.conf
+sudo a2enmod rewrite
 ```
 
-##### Configurando os serviços para que seja iniciado com o boot da máquina
-```bash
-# systemctl enable zabbix-server zabbix-agent apache2
+#### Passo 4 - Reiniciar serviço do Apache
+```shell
+systemctl restart apache2.service
 ```
 
-### 06 - Sexto Passo, Finalizando a instalação pela interface Web
-
-Agora, nosso objetivo avança para cima do frontend. Precisamos acessá-lo e finalizar a configuração.
-
-Precisamos saber qual o endereço do nosso servidor neste momento. Para isso, podemos usar o seguinte comando:
-```bash
+### 06 - Instalação via WEB
+Como de costume, podemos também realizar a instalação via navegador web. Basta abri-lo e acessar o endereço WEB do servidor GLPi que estávamos configurando e correr com a instalação tal como de costume.
+Caso não tenha certeza de qual o endereço IP, basta digitar o seguinte comando no servidor:
+```shell
 hostname -I
 ```
-
-Agora que já sabe qual o endereço IP está usando no seu Servidor, você pode acessá-lo a partir do navegador de sua preferência, no conforto de seu Desktop.
-
-Use o endereço baseado no exemplo a seguir:
-
-##### http://ENDEREÇO_IP/zabbix
-
-Você será redirecionado para a tela de setup do Zabbix Frontend, onde o processo de configuração é bem simples apenas com next, lembrar de selecionar a linguagem para português.
-
-
-<div align="center">
-  <img src="https://user-images.githubusercontent.com/83426602/224435710-c0f901de-2f2c-408f-82e7-fd3a1fdb618a.png" width="600px"  />
+<div align="left">
+  <img src="https://user-images.githubusercontent.com/83426602/224929173-a866db60-d23f-4f24-8053-208e67ca1d76.png" width="550px"  />
  </div>
-
-Agora, o sistema fará uma análise para validar que todos os requisitos foram perfeitamente atendidos. Claro que, se você seguiu todos os passos até este momento, estará tudo em ordem. Basta clicar em “Próximo”.
-
-Caso tenha algum requisito não atendido, retorne todo o processo e analise passo a passo o que pode ter passado. Se estiver começando a aprender Linux e/ou Zabbix, sugerimos que exclua seu projeto e comece do Zero com bastante atenção para não deixar nada passar. Te garantimos que, se seguir à risca todos os passos, não terá problema.
-
-<div align="center">
-  <img src="https://user-images.githubusercontent.com/83426602/224435895-3e760057-db85-4528-a7f7-f1607c85edad.png" width="600px"  />
+Os passos a são relativamente intuitivos, com exceção da configuração da conexão com o banco de dados que alguns iniciantes se atrapalham. Mas aqui vai um print para ajudar:
+<div align="left">
+  <img src="https://user-images.githubusercontent.com/83426602/224930279-eb05b8d8-8834-45ab-9302-ce27d65e81b9.png" width="550px"  />
+ </div>
+ <div align="left">
+  <img src="https://user-images.githubusercontent.com/83426602/224930443-1ae317e7-b24d-4a2a-8248-2b25024f8240.png" width="550px"  />
+ </div>
+  <div align="left">
+  <img src="https://user-images.githubusercontent.com/83426602/224930525-928cd155-35b6-464f-9c29-5fe1adfe2d57.png" width="550px"  />
+ </div>
+  <div align="left">
+  <img src="https://user-images.githubusercontent.com/83426602/224930768-37c2d132-31f0-4212-adfe-95dbfe2fec1e.png" width="550px"  />
  </div>
  
-Na próxima tela, o Zabbix Frontend solicita que sejam fornecidos os dados de conexão com o Banco de Dados a ser utilizado. Sim! Aqueles dados lá do início. É justamente pelo Banco de Dados que o Zabbix Backend e o Zabbix Frontend “trocam figurinhas”!
+![image](https://user-images.githubusercontent.com/83426602/224930873-19273c28-dc88-4330-bfca-8e700f56db13.png)
 
-Insira então os dados conforme segue:
+![image](https://user-images.githubusercontent.com/83426602/224930919-360c4b6f-f8f4-4c2e-89d8-3c4526cf2087.png)
 
-Tipo de Banco de Dados: MySQL
-Servidor de Banco de Dados: localhost
-Porta do Banco de Dados: 0
-Nome do Banco de dados: zabbix
-Usuário: zabbix
-Senha: 
+![image](https://user-images.githubusercontent.com/83426602/224930938-61255fb3-d51d-4935-b1d2-da464f51a52c.png)
 
-<div align="center">
-  <img src="https://user-images.githubusercontent.com/83426602/224436063-26aa6d95-671b-4620-b08f-c6987e3b733c.png" width="600px"  />
- </div>
- 
-Na próxima página, serão solicitados detalhes sobre o “Zabbix Server”. Você pode simplesmente deixar como está e clicar em “Próximo”.
-<div align="center">
-  <img src="https://user-images.githubusercontent.com/83426602/224436184-e0b99b25-344c-4114-9760-44dd385db299.png" width="600px"  />
- </div>
+![image](https://user-images.githubusercontent.com/83426602/224930959-e394afe6-0720-452e-8f5d-d89ae0ed8ea5.png)
 
-Agora, uma tela com todo o sumário da instalação será exibida. Estando tudo certo, apenas clique em “Próximo”.
-<div align="center">
-  <img src="https://user-images.githubusercontent.com/83426602/224436336-b9997ccf-762c-45f6-8bfb-d825c93fb1e1.png" width="600px"  />
- </div>
+![image](https://user-images.githubusercontent.com/83426602/224930992-98785580-9410-4b0e-a419-655bffd3d482.png)
 
-Finalmente, uma mensagem de “Felicitações” é exibida para nós confirmando que o Zabbix Frontend foi configurado com sucesso.
-<div align="center">
-  <img src="https://user-images.githubusercontent.com/83426602/224436499-4680d156-9918-4baf-a4b6-79d4ea531555.png" width="600px"  />
- </div>
 
- Para nossa alegria, a tão sonhada tela de Login é finalmente exibida.
-<div align="center">
-  <img src="https://user-images.githubusercontent.com/83426602/224436732-d6c10ae3-f80f-48d6-9b91-06645bbfd252.png" width="600px"  />
- </div>
- 
- #### O primeiro Login no Zabbix Frontend
- 
-Quando criamos a base de dados Zabbix, o script se incumbiu de criar um usuário administrador para nós.
 
-As credenciais de acesso são:
-##### Usuário(Com "A" em caixa alta):
-```bash
-Admin
-```
-##### Senha:
-```bash
-zabbix
-```
 
-Esta é a credencial padrão do Zabbix ao ser instalado. É importante ressaltar que o login Admin é com o A maiúsculo e não minúsculo.
-<div align="center">
-  <img src="https://user-images.githubusercontent.com/83426602/224437309-4ac2829b-9ab4-4338-b405-2d2b86b406b0.png" width="600px"  />
- </div>
+
 
 <div align="center">
   <img src="https://user-images.githubusercontent.com/83426602/148673032-78ed82b0-7074-417d-9da5-c183eb915789.gif" width="600px"  />
