@@ -19,15 +19,6 @@
 https://github.com/pedrohmenezes1/GTupan/tree/master/3%20-%20Grafana/1%20-%20Baixando%20e%20Instalando%20Grafana
 ```
 
-## ⭐**GitHub Estatísticas**
-
-<div align="center">
-<a href="https://github.com/pedrohmenezes1">
- <img height="180em" src="https://github-readme-stats.vercel.app/api?username=pedrohmenezes1&show_icons=true&theme=dracula&include_all_commits=true&count_private=true"/>
- <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=pedrohmenezes1&layout=compact&langs_count=7&theme=dracula"/>
-</div>
-
-
 ## 🌎 Redes Sociais
   
 <div> 
