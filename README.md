@@ -14,6 +14,30 @@
 https://github.com/pedrohmenezes1/GTupan/tree/master/1%20-%20VM%20Lab
 ```
 
+### 2 - Zabbix
+#### Link:
+```bash
+https://github.com/pedrohmenezes1/GTupan/tree/master/2%20-%20Zabbix
+```
+
+### 3 - Grafana
+#### Link:
+```bash
+https://github.com/pedrohmenezes1/GTupan/tree/master/3%20-%20Grafana
+```
+
+### 4 - TupanLAB
+#### Link:
+```bash
+https://github.com/pedrohmenezes1/GTupan/tree/master/4%20-%20TupanLAB
+```
+
+### 5 - GLPI 10
+#### Link:
+```bash
+https://github.com/pedrohmenezes1/GTupan/tree/master/5%20-%20GLPI%2010
+```
+
 ## ⭐**GitHub Estatísticas**
 
 <div align="center">
@@ -21,7 +45,6 @@ https://github.com/pedrohmenezes1/GTupan/tree/master/1%20-%20VM%20Lab
  <img height="160em" src="https://github-readme-stats.vercel.app/api?username=pedrohmenezes1&show_icons=true&theme=dracula&include_all_commits=true&count_private=true"/>
  <img height="160em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=pedrohmenezes1&layout=compact&langs_count=7&theme=dracula"/>
 </div>
-
 
 ## 🌎 Redes Sociais
   
