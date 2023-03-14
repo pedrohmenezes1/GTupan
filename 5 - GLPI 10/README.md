@@ -16,7 +16,7 @@
 ### 1 - Baixando e Instalando GLPI 10
 #### Link:
 ```bash
-https://github.com/pedrohmenezes1/GTupan/tree/master/3%20-%20Grafana/1%20-%20Baixando%20e%20Instalando%20Grafana
+https://github.com/pedrohmenezes1/GTupan/tree/master/5%20-%20GLPI%2010/1%20-%20Baixando%20e%20Instalando%20GLPI10
 ```
 
 ## 🌎 Redes Sociais
