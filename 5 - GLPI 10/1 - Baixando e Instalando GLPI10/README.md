@@ -9,13 +9,13 @@
  
 #  <strong>GLPI 10</strong>
   
-### Sistema Operacional ( Pré-Requisito )
+## Sistema Operacional ( Pré-Requisito )
 
 <p align="left">
     <img src="https://user-images.githubusercontent.com/83426602/224410906-dd15ce83-19be-46bc-8ffe-760bb8c81303.jpg" width="200" height="150">
 </p>
 
-### Dependências
+## Dependências
 
 | Nome             | Versão                  |
 | :-----------------| :-------------------------|
@@ -23,7 +23,7 @@
 | PHP           |  8.2.03
 | Apache2           |  2.4.54
 
-### Extensões
+## Extensões
 
 | Nome             | 
 | :----------------|
@@ -39,7 +39,7 @@
 | PHP-Zip          |
 | PHP-Bz2          |
 
-### Aplicação
+## Aplicação
 
 <p align="left">
     <img src="https://user-images.githubusercontent.com/83426602/224883177-a6278f90-94d1-4fb7-994d-37693119739e.png" width="150" height="100">
@@ -95,106 +95,86 @@ echo "servers pool.ntp.br" > /etc/openntpd/ntpd.conf
 systemctl enable openntpd
 systemctl start openntpd
 ```
+<p align="center"> 
+    <img src="https://user-images.githubusercontent.com/83426602/224911902-de09eea5-2b89-4383-9e46-0172278a9f09.png" width="450" height="350">
+    <img src="https://user-images.githubusercontent.com/83426602/224912112-c9739664-1835-46dc-aa62-c43acfa8fefa.png" width="450" height="350">
+</p>
 
-
-
-#### Instalando os repositórios
+### 3 - Instalando Dependências e Extensões
 
 #### Passo 1 - Atualizando o sistema
-
 Para evitar conflitos durante o procedimento de instalação, certifique-se de que seu sistema esteja atualizado. Isso pode ser feito usando este comando:
 ```bash
 apt update && apt upgrade -y
 ```
-#### Passo 2 - Instalando dependência PHP
 
+#### Passo 2 - Instalando dependência PHP
 Para instalar o PHP com sucesso, você deve instalar as dependências e, para isso, executar o comando abaixo. Essas dependências podem já existir em seu sistema, no entanto, a execução desse comando confirma sua presença.
 ```bash
 apt install software-properties-common apt-transport-https -y
 ```
 
 #### Passo 3 - Importar repositório PPA de PHP
-
 O próximo passo é importar o repositório PPA de Ondřej Surý, que é um renomado desenvolvedor PHP e Debian e mantém seus pacotes, bem como os pacotes do Ubuntu.
 ```bash
 add-apt-repository ppa:ondrej/php -y
 ```
 
-#### Passo 4 - Importar repositório do Zabbix
-
-Algumas distribuições de SO (em particular, distribuições baseadas em Debian) fornecem seus próprios pacotes Zabbix. Observe que esses pacotes não são suportados pelo Zabbix. Os pacotes Zabbix de terceiros podem estar desatualizados e podem não ter os recursos e correções de bugs mais recentes. Recomenda-se usar apenas os pacotes oficiais do repo.zabbix.com. Se você já usou pacotes Zabbix não oficiais, consulte as notas sobre como atualizar os pacotes Zabbix dos repositórios do sistema operacional
-
-##### Instale o repositório Zabbix:
+#### Passo 4 - Instalando PHP e Apache2
+Como já sabemos, o GLPi trata-se de uma ferramenta WEB. Podemos vê-lo simplesmente como um site a ser instalado. Portanto, precisamos montar um ambiente WEB para tal funcionalidade.
+Existem várias opções de serviço WEB a ser utilizada em ambientes GNU/Linux. Utilizaremos o servidor WEB Apache.
+Para habilitar o serviço Apache, basta seguir o comando abaixo:
 ```bash
-wget https://repo.zabbix.com/zabbix/6.4/ubuntu/pool/main/z/zabbix-release/zabbix-release_6.4-1+ubuntu22.04_all.deb
-dpkg -i zabbix-release_6.4-1+ubuntu22.04_all.deb
+apt install -y apache2 libapache2-mod-php php-soap php-cas php php-{apcu,cli,common,curl,gd,imap,ldap,mysql,xmlrpc,xml,mbstring,bcmath,intl,zip,redis,bz2}
 ```
-#### Passo 5 - Atualizar o sistema novamente
 
+#### Passo 5 - Atualizar o sistema novamente
 Para buscar atualizações disponíveis nos repositórios adicionados, recomendasse atualizar o sistema novamente:
 ```bash
 apt update && apt upgrade -y
 ```
+Repare que, ao invés de termos de ficar repetindo “php7-moduloX” para cada módulo do PHP, usamos um recurso do shell usando todo conteúdo dentro do par de “chaves” ({ }). Isso cria um vetor com os valores dentro das chaves para que não tenhamos de ficar digitando tudo. Pois é, tem coisas que só o shell faz para nós!
 
-#### Passo 6 - Instalar pacotes necessários para o frontend (serviço web) e backend (serviço MySQL)
+O GLPi é um sistema desenvolvido na linguagem PHP, por isso, neste comando instalamos vários módulos PHP.
 
-##### Apache2
+Ao fim deste comando, teremos um servidor WEB instalado já com suporte a linguagem PHP e com todas as dependências do GLPi resolvidas.
+
+### 4 - Instalando o GLPI
+
+#### Passo 1 - Entre na pasta /tmp
+Feito os passos acima, já temos então o ambiente pronto para instalar o GLPI 10, entre na pasta /tmp para fazer o download e a instalação do GLPI
 ```bash
-apt install -y apache2
+cd /tmp
 ```
 
-##### PHP 8.2 + Extensões
+#### Passo 2 - Faça o download da última versão do GLPI
+As versões podem ser vistas no link [GLPI](https://github.com/glpi-project/glpi/releases/), basta apenas copiar o link da última versão e colar após o comando wget, por exemplo:
 ```bash
-apt install php8.2 libapache2-mod-php8.2
-```
-Extensões:
-```bash
-apt install php-soap php-cas php8.2-{bz2,curl,mysql,xml}
+wget https://github.com/glpi-project/glpi/releases/tag/10.0.6
 ```
 
-Observações(Só seguir esses passos caso tenha outra versão instalada): Caso tenha uma versão anterior ativa na máquina recomendasse desativar para evitar conflitos ao subir o apache.
-Se você já tinha uma versão inferior do PHP instalada, pode mudar para 8.2 com:
+#### Passo 3 - Extrair o arquivo
+Após baixar o GLPI, extraia com o seguinte comando:
 ```bash
-sudo a2dismod php8.1
-```
-```bash
-sudo a2enmod php8.2
+tar -xvzf glpi-10.0.0-rc1.tgz
 ```
 
-Verificar versão do PHP:
+#### Passo 4 - Copiar para a pasta HTML
 ```bash
-php -v
+cp -Rf glpi /var/www/html
 ```
 
-##### Ferramentas extras
+#### Passo 5 - Adicionando permissões para a pasta do GLPI
 ```bash
-apt install -y xz-utils bzip2 unzip curl snmp telnet
+chmod 775 /var/www/html/* -Rf
+chown www-data. /var/www/html/* -Rf
 ```
 
-### 03 - Terceiro Passo, instale o servidor, o frontend e o agente Zabbix
-Feito os passos acima, já temos então o repositório Zabbix Oficial instalado e configurado em nosso Sistema, bastando agora, realizarmos a instalação dos pacotes do Zabbix via apt:
-```bash
-apt install zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent
-```
-### 04 - Quarto Passo, Preparando o Banco de Dados
-
-#### Passo 0 - Recapitulando!
-
-Tudo que fizemos até o momento foi:
-
-Ajuste de repositórios
-Instalação do servidor web Apache com suporte a PHP
-Instalação do serviço de Banco de Dados MySQL
-e, por fim, instalação do Zabbix Server com suporte a MySQL que roda como um Daemon, Zabbix Frontedn que é a página de administração do Zabbix Server, e o Zabbix Agent que é o agente do Zabbix para monitorar o próprio servidor.
-Porém, o Servidor Zabbix é uma espécie de concentrador de Dados. Todos os Ativos e Serviços são monitorados por meio de coleta de dados e estes dados precisam ser armazenados em um Banco de Dados para serem consultados sempre que quisermos ou até mesmo para compor dados estatísticos. Outra item importante a ser dito é que as nossas parametrizações também ficam salvas neste mesmo Banco de Dados.
-
-Já temos o MySQL a essa altura configurado como serviço e rodando. Mas, chegou a hora de criarmos uma Base de Dados para o Serviço Zabbix que estamos subindo.
-
-Esta base de dados precisará de um usuário e uma senha para poder se conectar, criar e atualizar itens. Para isso, vamos então executar os seguintes comandos:
+### 04 Preparando o Banco de Dados
 
 #### Passo 1 - Criando Database
 ```bash
-mysql> create database zabbix character set utf8mb4 collate utf8mb4_bin;
+mysql> create database glpi10 character set utf8mb4 collate utf8mb4_bin;
 ```
 
 #### Passo 2 - Criando Usuário ( Onde tem 'password' será a senha do usuário no banco )
