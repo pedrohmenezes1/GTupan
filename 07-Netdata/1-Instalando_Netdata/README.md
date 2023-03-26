@@ -1,5 +1,5 @@
 <p align="center"> 
-    <img src="https://user-images.githubusercontent.com/83426602/227750546-f7349f9d-745e-46ee-a3cd-570056c05585.gif" width="550" height="350">
+    <img src="https://user-images.githubusercontent.com/83426602/227753216-b45f418a-6475-491d-b1b3-7d21d1903a97.png" width="550" height="350">
 </p>
  <div align="center">
  <img src="https://img.shields.io/badge/Status-COMPLETED-green?style=for-the-badge&logo=appveyor"/>
