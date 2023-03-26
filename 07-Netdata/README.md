@@ -13,10 +13,10 @@
 
 ##### Repositório criado com intenção de apresentar tutoriais e documentações ao decorrer dos aprendizados adquiridos referente ao Netdata
 
-### 1-Instalando_Netdata
+### 01-Instalando_Netdata
 #### Link:
 ```bash
-https://github.com/pedrohmenezes1/GTupan/tree/master/07-Netdata/1-Instalando_Netdata
+https://github.com/pedrohmenezes1/GTupan/tree/master/07-Netdata/01-Instalando_Netdata
 ```
 
 ## 🌎 Redes Sociais
