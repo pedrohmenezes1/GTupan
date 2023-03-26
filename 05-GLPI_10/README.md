@@ -13,7 +13,7 @@
 
 ##### Repositório criado com intenção de apresentar tutoriais e documentações ao decorrer dos aprendizados adquiridos referente ao GLPI 10
 
-### 1-Instalando_GLPI10
+### 01-Instalando_GLPI10
 #### Link:
 ```bash
 https://github.com/pedrohmenezes1/GTupan/tree/master/05-GLPI_10/01-Instalando_GLPI10
