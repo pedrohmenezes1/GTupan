@@ -13,10 +13,10 @@
 
 ##### Repositório criado com intenção de apresentar tutoriais e documentações ao decorrer dos aprendizados adquiridos referente ao Prometheus
 
-### 1-Instalando_Prometheus
+### 01-Instalando_Prometheus
 #### Link:
 ```bash
-https://github.com/pedrohmenezes1/GTupan/tree/master/06-Prometheus/1-Instalando_Prometheus
+https://github.com/pedrohmenezes1/GTupan/tree/master/06-Prometheus/01-Instalando_Prometheus
 ```
 
 ## 🌎 Redes Sociais
