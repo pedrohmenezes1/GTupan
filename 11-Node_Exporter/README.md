@@ -1,5 +1,5 @@
 <p align="center"> 
-    <img src="https://user-images.githubusercontent.com/83426602/227755903-6e136fcd-4272-4ff5-8f7d-d5d0fc391692.gif" width="550" height="350">
+    <img src="https://user-images.githubusercontent.com/83426602/227756591-51af5fd8-9942-48d2-9b66-20b83a470c59.gif" width="550" height="350">
 </p>
  <div align="center">
  <img src="https://img.shields.io/badge/Status-CONSTRUCTION-yellow?style=for-the-badge&logo=appveyor"/>
@@ -7,16 +7,16 @@
  <img src="https://img.shields.io/static/v1?label=Grupo&message=Tupan&color=7159c1&style=for-the-badge&logo=ghost"/>
  </div>
  
-#  <strong>cAdvisor</strong>
+#  <strong>Node_Exporter</strong>
 
 <img align="right" width="300" src="https://i2.wp.com/allhtaccess.info/wp-content/uploads/2018/03/programming.gif?fit=1281%2C716&ssl=1" />
 
-##### Repositório criado com intenção de apresentar tutoriais e documentações ao decorrer dos aprendizados adquiridos referente ao cAdvisor
+##### Repositório criado com intenção de apresentar tutoriais e documentações ao decorrer dos aprendizados adquiridos referente ao Node_Exporter
 
-### 01-Instalando_cAdvisor
+### 01-Instalando_Node_Exporter
 #### Link:
 ```bash
-https://github.com/pedrohmenezes1/GTupan/tree/master/10-cAdvisor/01-Instalando_cAdvisor
+https://github.com/pedrohmenezes1/GTupan/tree/master/11-Node_Exporter/01-Instalando_Node_Exporter
 ```
 
 ## 🌎 Redes Sociais
