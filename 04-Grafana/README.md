@@ -1,5 +1,5 @@
 <p align="center"> 
-    <img src="https://user-images.githubusercontent.com/83426602/224461274-81c2a7bf-e65c-4c6c-877c-d31fe219684e.gif" width="550" height="350">
+    <img src="(https://user-images.githubusercontent.com/83426602/227752524-391d92da-cdf7-4d0b-a474-fe55a68e65fd.gif" width="550" height="350">
 </p>
  <div align="center">
  <img src="https://img.shields.io/badge/Status-CONSTRUCTION-yellow?style=for-the-badge&logo=appveyor"/>
@@ -13,10 +13,10 @@
 
 ##### Repositório criado com intenção de apresentar tutoriais e documentações ao decorrer dos aprendizados adquiridos referente ao Grafana
 
-### 1 - Baixando e Instalando Grafana
+### 1-Instalando_Grafana
 #### Link:
 ```bash
-https://github.com/pedrohmenezes1/GTupan/tree/master/3%20-%20Grafana/1%20-%20Baixando%20e%20Instalando%20Grafana
+https://github.com/pedrohmenezes1/GTupan/tree/master/04-Grafana/1-Instalando_Grafana
 ```
 
 ## 🌎 Redes Sociais
