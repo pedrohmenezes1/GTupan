@@ -16,7 +16,7 @@
 ### 1-Instalando_GLPI10
 #### Link:
 ```bash
-https://github.com/pedrohmenezes1/GTupan/tree/master/05-GLPI%2010/01-Instalando_GLPI10
+https://github.com/pedrohmenezes1/GTupan/tree/master/05-GLPI_10/01-Instalando_GLPI10
 ```
 
 ## 🌎 Redes Sociais
