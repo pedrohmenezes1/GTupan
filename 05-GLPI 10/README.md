@@ -11,12 +11,12 @@
 
 <img align="right" width="300" src="https://i2.wp.com/allhtaccess.info/wp-content/uploads/2018/03/programming.gif?fit=1281%2C716&ssl=1" />
 
-##### Repositório criado com intenção de apresentar tutoriais e documentações ao decorrer dos aprendizados adquiridos referente ao GLPI 10
+##### Repositório criado com intenção de apresentar tutoriais e documentações ao decorrer dos aprendizados adquiridos referente ao Grafana
 
 ### 1 - Baixando e Instalando GLPI 10
 #### Link:
 ```bash
-https://github.com/pedrohmenezes1/GTupan/tree/master/05-GLPI%2010/01-Instalando_GLPI10
+https://github.com/pedrohmenezes1/GTupan/tree/master/5%20-%20GLPI%2010/1%20-%20Baixando%20e%20Instalando%20GLPI10
 ```
 
 ## 🌎 Redes Sociais
