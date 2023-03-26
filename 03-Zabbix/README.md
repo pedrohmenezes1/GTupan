@@ -13,7 +13,7 @@
 
 ##### Repositório criado com intenção de apresentar tutoriais e documentações ao decorrer dos aprendizados adquiridos referente ao Zabbix
 
-### 01-Instalando_Zabbix_Serverr
+### 01-Instalando_Zabbix_Server
 #### Link:
 ```bash
 https://github.com/pedrohmenezes1/GTupan/tree/master/03-Zabbix/01-Instalando_Zabbix_Server
