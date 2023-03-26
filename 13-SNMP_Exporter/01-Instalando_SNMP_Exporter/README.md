@@ -1,5 +1,5 @@
 <p align="center"> 
-    <img src="https://user-images.githubusercontent.com/83426602/227755197-254c356e-df4f-4e1d-ac13-d79e76a80876.png" width="550" height="350">
+    <img src="https://user-images.githubusercontent.com/83426602/227759342-d1881bc9-1cbb-4fa2-84fa-892c8d97d5bd.jpg" width="750" height="450">
 </p>
  <div align="center">
  <img src="https://img.shields.io/badge/Status-COMPLETED-green?style=for-the-badge&logo=appveyor"/>
@@ -7,11 +7,11 @@
  <img src="https://img.shields.io/static/v1?label=Grupo&message=Tupan&color=7159c1&style=for-the-badge&logo=ghost"/>
  </div>
  
-#  <strong>Rocketchat</strong>
+#  <strong>SNMP_Exporter</strong>
 
-## Instalação do RocketChat no Linux Ubuntu 22.04
+## Instalação do SNMP Exporter no Linux Ubuntu 22.04
 
-RocketChat é uma plataforma de comunicação em equipe que permite aos usuários se comunicarem por meio de mensagens de texto, voz e vídeo em tempo real. Neste tutorial, você aprenderá como instalar o RocketChat em um sistema operacional Linux Ubuntu 22.04.
+O SNMP Exporter é uma ferramenta que permite coletar métricas SNMP e exportá-las no formato do Prometheus. Neste tutorial, vamos aprender como instalar e configurar o SNMP Exporter em um sistema operacional Linux Ubuntu 22.04.
  
 ## Sistema Operacional
 
@@ -19,129 +19,143 @@ RocketChat é uma plataforma de comunicação em equipe que permite aos usuário
     <img src="https://user-images.githubusercontent.com/83426602/224410906-dd15ce83-19be-46bc-8ffe-760bb8c81303.jpg" width="200" height="150">
 </p>
 
-## Passo 1: Instalar o MongoDB
+## Passo 1: Baixar o SNMP Exporter
 
-O RocketChat usa o MongoDB como banco de dados. Portanto, precisamos instalar o MongoDB antes de instalar o RocketChat. Para fazer isso, siga os passos abaixo:
-
-1. Adicione o repositório do MongoDB:
+Para baixar o SNMP Exporter, acesse o [repositório oficial](https://github.com/prometheus/snmp_exporter/releases) e procure pela versão mais recente. Em seguida, baixe o arquivo com a extensão .tar.gz. com o seguinte comando:
 ```bash
-wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add -
-```
-2. Crie um arquivo mongodb.list no diretório /etc/apt/sources.list.d/ e adicione a seguinte linha:
-```bash
-deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/5.0 multiverse
-```
-3. Atualize a lista de pacotes:
-```bash
-sudo apt-get update
-```
-4. Instale o MongoDB:
-```bash
-sudo apt-get install -y mongodb-org
-```
-5. Inicie o serviço do MongoDB e configure-o para ser executado automaticamente na inicialização do sistema:
-```bash
-sudo systemctl start mongod
-sudo systemctl enable mongod
+wget https://github.com/prometheus/snmp_exporter/releases/download/v0.21.0/snmp_exporter-0.21.0.linux-amd64.tar.gz
 ```
 
-## Passo 2: Instalar o Node.js e o NPM
+## Passo 2: Descompactar o arquivo baixado
 
-O RocketChat é construído com Node.js e NPM. Portanto, precisamos instalar essas dependências antes de instalar o RocketChat. Para fazer isso, siga os passos abaixo:
+Com o arquivo baixado, digite o seguinte comando para descompactar o arquivo:
+```bash
+tar -xvzf snmp_exporter-*.tar.gz
+```
+Este comando irá descompactar o arquivo baixado para uma nova pasta com o nome "snmp_exporter-*".
 
-1. Adicione o repositório do Node.js:
-```bash
-curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-```
-2. Instale o Node.js e o NPM:
-```bash
-sudo apt-get install -y nodejs
-```
+## Passo 3: Mover a pasta descompactada para /opt
 
-## Passo 3: Instalar o RocketChat
-
-Agora que instalamos as dependências necessárias, podemos instalar o RocketChat. Para fazer isso, siga os passos abaixo:
-
-1. Baixe a última versão do RocketChat:
+Mova a pasta "snmp_exporter-*" para a pasta "/opt" usando o seguinte comando:
 ```bash
-curl -L https://releases.rocket.chat/latest/download -o rocket.chat.tgz
-```
-2. Extraia o arquivo baixado:
-```bash
-tar -xzf rocket.chat.tg
-```
-3. Mova o diretório extraído para o diretório /opt:
-```bash
-sudo mv bundle /opt/RocketChat
-```
-4. Defina as permissões corretas para o diretório:
-```bash
-sudo chown -R 200:200 /opt/RocketChat
-```
-5. Instale as dependências do RocketChat:
-```bash
-cd /opt/RocketChat/programs/server
-npm install
-```
-6. Inicie o RocketChat:
-```bash
-cd /opt/RocketChat
-node main.js
-```
-7. O RocketChat estará disponível em http://localhost:3000 no seu navegador. O próximo passo é configurar um servidor de proxy reverso, como o Nginx, para encaminhar as solicitações para o RocketChat.
-
-## Passo 4: Configurar o Nginx
-
-O Nginx é um servidor de proxy reverso popular que podemos usar para encaminhar solicitações para o RocketChat. Para configurar o Nginx, siga os passos abaixo:
-
-1. Instale o Nginx:
-```bash
-sudo apt update
-sudo apt install nginx
-```
-2. Crie um novo arquivo de configuração do Nginx para o RocketChat:
-```bash
-sudo nano /etc/nginx/conf.d/rocketchat.conf
-```
-3. Cole o seguinte conteúdo no arquivo e substitua your_domain pelo nome de domínio ou endereço IP do servidor onde o RocketChat está instalado:
-```bash
-server {
-  listen 80;
-  server_name your_domain;
-
-  location / {
-    proxy_pass http://localhost:3000/;
-    proxy_http_version 1.1;
-    proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection "upgrade";
-    proxy_set_header Host $host;
-  }
-}
-```
-4. Salve e feche o arquivo
-5. Verifique se a configuração do Nginx está correta e reinicie o serviço:
-```bash
-sudo nginx -t
-sudo systemctl restart nginx
+sudo cd snmp_exporter-*
+sudo mkdir /opt/snmp_exporter
+sudo mv * /opt/snmp_exporter
 ```
 
-## Passo 5: Acessar o RocketChat
+## Passo 4: Adicionar o usuário SNMP Exporter
 
-Agora que o RocketChat e o Nginx estão configurados, podemos acessar o RocketChat pelo navegador.
+Adicione um novo usuário chamado "snmp_exporter" usando o seguinte comando:
+```bash
+sudo useradd --no-create-home --shell /bin/false snmp_exporter
+```
 
-1. Abra o navegador e acesse http://your_domain.
-2. O RocketChat será carregado e você verá a tela de login. Crie uma nova conta ou faça login com uma conta existente.
-3. Depois de fazer login, você terá acesso ao painel de controle do RocketChat e poderá começar a usá-lo.
+## Passo 5: Configurar as permissões da pasta do SNMP Exporter
 
-## Conclusão
+Configure as permissões da pasta do SNMP Exporter para que o usuário "snmp_exporter" tenha acesso a ela:
+```bash
+sudo chown -R snmp_exporter:snmp_exporter /opt/snmp_exporter
+```
 
-Neste tutorial, aprendemos como instalar o RocketChat em um sistema operacional Linux Ubuntu 22.04. Fizemos a instalação do MongoDB, do Node.js, do Nginx e do RocketChat em si.
+## Passo 6: Criar o arquivo de configuração
 
-Também configuramos o Nginx para fazer o proxy reverso do RocketChat, permitindo que possamos acessá-lo de forma segura e com um nome de domínio personalizado.
+Crie um arquivo de configuração para o SNMP Exporter usando o seguinte comando:
+```bash
+sudo nano /opt/snmp_exporter/snmp.yml
+```
+Adicione o seguinte conteúdo ao arquivo e salve-o:
+```yaml
+module:
+  if_mib:
+    walk:
+      - ifDescr
+      - ifInOctets
+      - ifInErrors
+      - ifOutOctets
+      - ifOutErrors
+      - ifSpeed
+```
 
-O RocketChat é uma plataforma de chat muito poderosa, e com este tutorial você poderá instalá-la facilmente em seu próprio servidor. Com o uso do Nginx, você também pode garantir a segurança do seu servidor, fazendo o proxy reverso para o RocketChat e permitindo o acesso seguro de seus usuários.
+Este arquivo de configuração faz o SNMP Exporter coletar as seguintes métricas:
 
-Lembre-se de sempre manter seu servidor atualizado e seguro, fazendo atualizações regulares e mantendo senhas fortes e seguras. Com isso, você pode desfrutar de uma plataforma de chat segura e personalizada para suas necessidades.
+* ifDescr: Descrição da interface.
+* ifInOctets: Quantidade de octetos recebidos pela interface.
+* ifInErrors: Quantidade de erros recebidos pela interface.
+* ifOutOctets: Quantidade de octetos transmitidos pela interface.
+* ifOutErrors: Quantidade de erros transmitidos pela interface.
+* ifSpeed: Velocidade da interface em bits por segundo.
+
+## Passo 7: Criar o arquivo de serviço
+
+1. Crie um arquivo de serviço para o SNMP Exporter usando o seguinte comando:
+```bash
+sudo nano /etc/systemd/system/snmp_exporter.service
+```
+2. Adicione o seguinte conteúdo ao arquivo e salve-o:
+```bash
+[Unit]
+Description=SNMP Exporter
+After=network.target
+
+[Service]
+User=snmp_exporter
+ExecStart=/usr/local/bin/snmp_exporter --config.file /etc/snmp_exporter/snmp.yml
+
+[Install]
+WantedBy=multi-user.target
+```
+Este arquivo de serviço define um serviço chamado snmp_exporter que é executado como o usuário snmp_exporter. O comando ExecStart inicia o snmp_exporter usando o arquivo de configuração /etc/snmp_exporter/snmp.yml.
+
+3. Salve e feche o arquivo.
+
+4. Recarregue o systemd para ler o novo arquivo de serviço:
+```bash
+sudo systemctl daemon-reload
+```
+
+5. Inicie o serviço snmp_exporter e verifique se ele está em execução:
+```bash
+sudo systemctl start snmp_exporter
+sudo systemctl status snmp_exporter
+```
+A saída do comando status deve indicar que o serviço está em execução e sem erros.
+
+6. Certifique-se de que o serviço inicie automaticamente na inicialização do sistema:
+```bash
+sudo systemctl enable snmp_exporter
+```
+
+7. Se você tiver o firewall habilitado em seu sistema, adicione uma regra para permitir o tráfego SNMP:
+```bash
+sudo ufw allow snmp
+```
+
+Parabéns! Agora você tem o snmp_exporter instalado e configurado em seu sistema e pronto para coletar métricas SNMP. Agora você pode configurar o Prometheus para coletar essas métricas e criar gráficos e alertas.
+
+## Passo 8: Configurar o prometheus
+
+Para configurar o snmp_exporter com o Prometheus, siga os seguintes passos:
+
+1. Abra o arquivo de configuração do Prometheus:
+```bash
+sudo nano /etc/prometheus/prometheus.yml
+```
+2. Adicione as configurações do snmp_exporter no final do arquivo:
+```yaml
+# SNMP Exporter
+- job_name: 'snmp_exporter'
+  static_configs:
+  - targets: ['localhost:9116']
+    metrics_path: /snmp
+    params:
+      module: [if_mib, system, snmp]
+```
+Neste exemplo, estamos configurando o snmp_exporter para coletar métricas SNMP das MIBs if_mib, system e snmp. Também estamos definindo a porta em que o snmp_exporter está sendo executado (9116) e o caminho para as métricas (/snmp).
+3. Salve e feche o arquivo
+4. Reinicie o serviço do Prometheus:
+```bash
+sudo systemctl restart prometheus
+```
 
 <div align="center">
   <img src="https://user-images.githubusercontent.com/83426602/148673032-78ed82b0-7074-417d-9da5-c183eb915789.gif" width="600px"  />
