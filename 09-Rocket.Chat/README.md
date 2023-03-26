@@ -13,10 +13,10 @@
 
 ##### Repositório criado com intenção de apresentar tutoriais e documentações ao decorrer dos aprendizados adquiridos referente ao RocketChat
 
-### 1-Instalando_Rocketchat
+### 01-Instalando_Rocketchat
 #### Link:
 ```bash
-https://github.com/pedrohmenezes1/GTupan/tree/master/09-Rocket.Chat/1-Instalando_Rocketchat
+https://github.com/pedrohmenezes1/GTupan/tree/master/09-Rocket.Chat/01-Instalando_Rocketchat
 ```
 
 ## 🌎 Redes Sociais
