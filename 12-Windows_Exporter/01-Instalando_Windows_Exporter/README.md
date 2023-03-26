@@ -1,5 +1,5 @@
 <p align="center"> 
-    <img src="https://user-images.githubusercontent.com/83426602/227755197-254c356e-df4f-4e1d-ac13-d79e76a80876.png" width="550" height="350">
+    <img src="https://user-images.githubusercontent.com/83426602/227757992-ab139519-d33a-4517-8d12-5316f0c1db40.jpg" width="750" height="450">
 </p>
  <div align="center">
  <img src="https://img.shields.io/badge/Status-COMPLETED-green?style=for-the-badge&logo=appveyor"/>
@@ -7,141 +7,89 @@
  <img src="https://img.shields.io/static/v1?label=Grupo&message=Tupan&color=7159c1&style=for-the-badge&logo=ghost"/>
  </div>
  
-#  <strong>Rocketchat</strong>
+#  <strong>Windows_Exporter</strong>
 
-## Instalação do RocketChat no Linux Ubuntu 22.04
-
-RocketChat é uma plataforma de comunicação em equipe que permite aos usuários se comunicarem por meio de mensagens de texto, voz e vídeo em tempo real. Neste tutorial, você aprenderá como instalar o RocketChat em um sistema operacional Linux Ubuntu 22.04.
+## Instalação do Windows_Exporter no Windows
  
 ## Sistema Operacional
 
 <p align="left">
-    <img src="https://user-images.githubusercontent.com/83426602/224410906-dd15ce83-19be-46bc-8ffe-760bb8c81303.jpg" width="200" height="150">
+    <img src="https://user-images.githubusercontent.com/83426602/227758040-d19ab869-add5-4d40-bc98-52d577fa7a2c.png" width="200" height="150">
 </p>
 
-## Passo 1: Instalar o MongoDB
+## Passo 1: Baixar o instalador do Windows Exporter
 
-O RocketChat usa o MongoDB como banco de dados. Portanto, precisamos instalar o MongoDB antes de instalar o RocketChat. Para fazer isso, siga os passos abaixo:
+* Acesse o repositório oficial do [windows_exporter](https://github.com/prometheus-community/windows_exporter/releases/tag/v0.21.0) e procure pela última versão em release que esteja latest, e baixe o aquivo .msi de acordo com a arquitetura do sistema, x86 ou x64.
 
-1. Adicione o repositório do MongoDB:
-```bash
-wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add -
-```
-2. Crie um arquivo mongodb.list no diretório /etc/apt/sources.list.d/ e adicione a seguinte linha:
-```bash
-deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/5.0 multiverse
-```
-3. Atualize a lista de pacotes:
-```bash
-sudo apt-get update
-```
-4. Instale o MongoDB:
-```bash
-sudo apt-get install -y mongodb-org
-```
-5. Inicie o serviço do MongoDB e configure-o para ser executado automaticamente na inicialização do sistema:
-```bash
-sudo systemctl start mongod
-sudo systemctl enable mongod
-```
+## Passo 2: Executar o instalador
 
-## Passo 2: Instalar o Node.js e o NPM
+Após o download, clique duas vezes no arquivo .msi baixado para abrir o instalador.
+Clique em "Next" na tela de boas-vindas.
 
-O RocketChat é construído com Node.js e NPM. Portanto, precisamos instalar essas dependências antes de instalar o RocketChat. Para fazer isso, siga os passos abaixo:
+## Passo 3: Aceitar os termos de licença
 
-1. Adicione o repositório do Node.js:
-```bash
-curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-```
-2. Instale o Node.js e o NPM:
-```bash
-sudo apt-get install -y nodejs
-```
+Leia os termos de licença e, se estiver de acordo, marque a caixa de seleção "I accept the terms in the License Agreement".
+Clique em "Next".
 
-## Passo 3: Instalar o RocketChat
+## Passo 4: Selecionar o local de instalação
 
-Agora que instalamos as dependências necessárias, podemos instalar o RocketChat. Para fazer isso, siga os passos abaixo:
+Selecione o local onde deseja instalar o Windows Exporter.
+Clique em "Next".
 
-1. Baixe a última versão do RocketChat:
-```bash
-curl -L https://releases.rocket.chat/latest/download -o rocket.chat.tgz
-```
-2. Extraia o arquivo baixado:
-```bash
-tar -xzf rocket.chat.tg
-```
-3. Mova o diretório extraído para o diretório /opt:
-```bash
-sudo mv bundle /opt/RocketChat
-```
-4. Defina as permissões corretas para o diretório:
-```bash
-sudo chown -R 200:200 /opt/RocketChat
-```
-5. Instale as dependências do RocketChat:
-```bash
-cd /opt/RocketChat/programs/server
-npm install
-```
-6. Inicie o RocketChat:
-```bash
-cd /opt/RocketChat
-node main.js
-```
-7. O RocketChat estará disponível em http://localhost:3000 no seu navegador. O próximo passo é configurar um servidor de proxy reverso, como o Nginx, para encaminhar as solicitações para o RocketChat.
+## Passo 5: Selecionar os componentes a serem instalados
 
-## Passo 4: Configurar o Nginx
+Selecione os componentes que deseja instalar.
+Clique em "Next".
 
-O Nginx é um servidor de proxy reverso popular que podemos usar para encaminhar solicitações para o RocketChat. Para configurar o Nginx, siga os passos abaixo:
+## Passo 6: Definir o nome do serviço
 
-1. Instale o Nginx:
-```bash
-sudo apt update
-sudo apt install nginx
+Defina o nome do serviço que será criado para o Windows Exporter.
+Clique em "Next".
+
+## Passo 7: Concluir a instalação
+
+Clique em "Install" para iniciar a instalação.
+Aguarde enquanto os arquivos são copiados para o seu sistema.
+Clique em "Finish" para concluir a instalação.
+
+## Passo 8: Verificar se o serviço do Windows Exporter está em execução
+
+Abra o "Services" do Windows, procure pelo serviço do Windows Exporter e verifique se está em execução.
+
+## Passo 9: Verificar as métricas
+
+Abra um navegador da web e acesse "http://localhost:9182/metrics" para verificar se as métricas estão sendo coletadas.
+Pronto! Agora você tem o Windows Exporter instalado em seu sistema Windows e pode começar a monitorar as métricas do seu sistema com o Prometheus.
+
+## Passo 10: Integração com o prometheus
+
+Para configurar o Windows Exporter com o Prometheus, siga os seguintes passos:
+
+1. Abra o arquivo de configuração do Prometheus prometheus.yml com um editor de texto.
+
+2. Adicione a seguinte configuração no final do arquivo:
+```yaml
+  - job_name: 'windows'
+    static_configs:
+    - targets: ['ip_do_windows_exporter:9182']
 ```
-2. Crie um novo arquivo de configuração do Nginx para o RocketChat:
-```bash
-sudo nano /etc/nginx/conf.d/rocketchat.conf
+Substitua ip_do_windows_exporter pelo endereço IP do servidor onde o Windows Exporter está instalado.
+Para adicionar mais de um target basta apenas adicionar uma virgula em targets e digitar o ip seguinte por exemplo:
+```yaml
+  - job_name: 'windows'
+    static_configs:
+    - targets: ['ip_do_windows_exporter1:9182','ip_do_windows_exporter2:9182','ip_do_windows_exporter3:9182']
 ```
-3. Cole o seguinte conteúdo no arquivo e substitua your_domain pelo nome de domínio ou endereço IP do servidor onde o RocketChat está instalado:
-```bash
-server {
-  listen 80;
-  server_name your_domain;
-
-  location / {
-    proxy_pass http://localhost:3000/;
-    proxy_http_version 1.1;
-    proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection "upgrade";
-    proxy_set_header Host $host;
-  }
-}
+3. Salve e feche o arquivo.
+4. Reinicie o serviço do Prometheus para que as mudanças tenham efeito:
+```yaml
+sudo systemctl restart prometheus
 ```
-4. Salve e feche o arquivo
-5. Verifique se a configuração do Nginx está correta e reinicie o serviço:
-```bash
-sudo nginx -t
-sudo systemctl restart nginx
-```
-
-## Passo 5: Acessar o RocketChat
-
-Agora que o RocketChat e o Nginx estão configurados, podemos acessar o RocketChat pelo navegador.
-
-1. Abra o navegador e acesse http://your_domain.
-2. O RocketChat será carregado e você verá a tela de login. Crie uma nova conta ou faça login com uma conta existente.
-3. Depois de fazer login, você terá acesso ao painel de controle do RocketChat e poderá começar a usá-lo.
+5. Agora você pode acessar o Prometheus na porta padrão (9090) e verificar se o Windows Exporter está sendo coletado. Para visualizar as métricas coletadas pelo Windows Exporter, execute a consulta windows_* no console do Prometheus.
 
 ## Conclusão
 
-Neste tutorial, aprendemos como instalar o RocketChat em um sistema operacional Linux Ubuntu 22.04. Fizemos a instalação do MongoDB, do Node.js, do Nginx e do RocketChat em si.
-
-Também configuramos o Nginx para fazer o proxy reverso do RocketChat, permitindo que possamos acessá-lo de forma segura e com um nome de domínio personalizado.
-
-O RocketChat é uma plataforma de chat muito poderosa, e com este tutorial você poderá instalá-la facilmente em seu próprio servidor. Com o uso do Nginx, você também pode garantir a segurança do seu servidor, fazendo o proxy reverso para o RocketChat e permitindo o acesso seguro de seus usuários.
-
-Lembre-se de sempre manter seu servidor atualizado e seguro, fazendo atualizações regulares e mantendo senhas fortes e seguras. Com isso, você pode desfrutar de uma plataforma de chat segura e personalizada para suas necessidades.
+O Windows Exporter é uma ferramenta muito útil para coletar métricas do sistema operacional Windows e de seus aplicativos. Com este tutorial, você aprendeu como instalar e configurar o Windows Exporter em um sistema operacional Windows e como configurar o Prometheus para coletar as métricas coletadas pelo Windows Exporter. Agora você pode monitorar o desempenho do seu sistema operacional Windows usando o Prometheus e o Windows Exporter.
 
 <div align="center">
   <img src="https://user-images.githubusercontent.com/83426602/148673032-78ed82b0-7074-417d-9da5-c183eb915789.gif" width="600px"  />
