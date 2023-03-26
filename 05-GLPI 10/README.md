@@ -1,5 +1,5 @@
 <p align="center"> 
-    <img src="https://user-images.githubusercontent.com/83426602/224879254-208e341b-cf75-4b79-893e-06033057734b.gif" width="550" height="350">
+    <img src="https://user-images.githubusercontent.com/83426602/227752706-dd6cf377-0524-4615-82ee-be0ca27dcef0.gif" width="550" height="350">
 </p>
  <div align="center">
  <img src="https://img.shields.io/badge/Status-CONSTRUCTION-yellow?style=for-the-badge&logo=appveyor"/>
@@ -11,12 +11,12 @@
 
 <img align="right" width="300" src="https://i2.wp.com/allhtaccess.info/wp-content/uploads/2018/03/programming.gif?fit=1281%2C716&ssl=1" />
 
-##### Repositório criado com intenção de apresentar tutoriais e documentações ao decorrer dos aprendizados adquiridos referente ao Grafana
+##### Repositório criado com intenção de apresentar tutoriais e documentações ao decorrer dos aprendizados adquiridos referente ao GLPI 10
 
-### 1 - Baixando e Instalando GLPI 10
+### 1-Instalando_GLPI10
 #### Link:
 ```bash
-https://github.com/pedrohmenezes1/GTupan/tree/master/5%20-%20GLPI%2010/1%20-%20Baixando%20e%20Instalando%20GLPI10
+https://github.com/pedrohmenezes1/GTupan/tree/master/05-GLPI%2010/01-Instalando_GLPI10
 ```
 
 ## 🌎 Redes Sociais
