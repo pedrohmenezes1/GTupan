@@ -13,10 +13,10 @@
 
 ##### Repositório criado com intenção de apresentar tutoriais e documentações ao decorrer dos aprendizados adquiridos referente ao Grafana
 
-### 1-Instalando_Grafana
+### 01-Instalando_Grafana
 #### Link:
 ```bash
-https://github.com/pedrohmenezes1/GTupan/tree/master/04-Grafana/1-Instalando_Grafana
+https://github.com/pedrohmenezes1/GTupan/tree/master/04-Grafana/01-Instalando_Grafana
 ```
 
 ## 🌎 Redes Sociais
