@@ -8,34 +8,91 @@
 
 ##### Repositório criado com intenção de apresentar tutoriais e documentações ao decorrer dos aprendizados adquiridos
 
-### 1 - VM LAB
+=============================================================
+
+### 00-Projeto_Monitoramento
 #### Link:
 ```bash
-https://github.com/pedrohmenezes1/GTupan/tree/master/1%20-%20VM%20Lab
+https://github.com/pedrohmenezes1/GTupan/tree/master/00-Projeto_Monitoramento
 ```
 
-### 2 - Zabbix
+
+### 01-VM_Lab
 #### Link:
 ```bash
-https://github.com/pedrohmenezes1/GTupan/tree/master/2%20-%20Zabbix
+https://github.com/pedrohmenezes1/GTupan/tree/master/01-VM_Lab
 ```
 
-### 3 - Grafana
+### 02-Docker
 #### Link:
 ```bash
-https://github.com/pedrohmenezes1/GTupan/tree/master/3%20-%20Grafana
+https://github.com/pedrohmenezes1/GTupan/tree/master/02-Docker
 ```
 
-### 4 - TupanLAB
+### 03-Zabbix
 #### Link:
 ```bash
-https://github.com/pedrohmenezes1/GTupan/tree/master/4%20-%20TupanLAB
+https://github.com/pedrohmenezes1/GTupan/tree/master/03-Zabbix
 ```
 
-### 5 - GLPI 10
+### 04-Grafana
 #### Link:
 ```bash
-https://github.com/pedrohmenezes1/GTupan/tree/master/5%20-%20GLPI%2010
+https://github.com/pedrohmenezes1/GTupan/tree/master/04-Grafana
+```
+
+### 05-GLPI_10
+#### Link:
+```bash
+https://github.com/pedrohmenezes1/GTupan/tree/master/05-GLPI_10
+```
+
+### 06-Prometheus
+#### Link:
+```bash
+https://github.com/pedrohmenezes1/GTupan/tree/master/06-Prometheus
+```
+
+### 07-Netdata
+#### Link:
+```bash
+https://github.com/pedrohmenezes1/GTupan/tree/master/07-Netdata
+```
+
+### 08-AlertManager
+#### Link:
+```bash
+https://github.com/pedrohmenezes1/GTupan/tree/master/08-AlertManager
+```
+
+### 09-Rocket.Chat
+#### Link:
+```bash
+https://github.com/pedrohmenezes1/GTupan/tree/master/09-Rocket.Chat
+```
+
+### 10-cAdvisor
+#### Link:
+```bash
+https://github.com/pedrohmenezes1/GTupan/tree/master/10-cAdvisor
+```
+
+### 11-Node_Exporter
+#### Link:
+```bash
+https://github.com/pedrohmenezes1/GTupan/tree/master/11-Node_Exporter
+```
+
+### 12-Windows_Exporter
+#### Link:
+```bash
+https://github.com/pedrohmenezes1/GTupan/tree/master/12-Windows_Exporter
+```
+
+### 13-SNMP_Exporter
+#### Link:
+```bash
+https://github.com/pedrohmenezes1/GTupan/tree/master/13-SNMP_Exporter
 ```
 
 ## ⭐**GitHub Estatísticas**
