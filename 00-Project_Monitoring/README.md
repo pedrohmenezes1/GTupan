@@ -52,6 +52,12 @@ Esses são apenas alguns dos comandos básicos do Docker e suas funcionalidades.
 ### Conclusão
 O Docker é uma ferramenta poderosa e versátil que permite aos desenvolvedores e operadores criar, implantar e gerenciar aplicativos de forma mais eficiente e confiável. Com sua arquitetura cliente-servidor, isolamento de contêiner e portabilidade, o Docker se tornou uma parte essencial do arsenal de ferramentas para a implantação de aplicativos modernos em escala.
 
+### Vídeos
+
+[![](https://user-images.githubusercontent.com/83426602/228658702-da32c54a-0805-4827-8682-48bf180097b0.png)](https://www.youtube.com/watch?v=Kzcz-EVKBEQ)
+[![](https://user-images.githubusercontent.com/83426602/228659596-87dbaf99-fb4b-4421-9c54-4e8544c2c792.png)](https://www.youtube.com/watch?v=HxPz3eLnXZk)
+
+
 <div align="center">
   <img src="https://user-images.githubusercontent.com/83426602/148673032-78ed82b0-7074-417d-9da5-c183eb915789.gif" width="600px"  />
  </div>
