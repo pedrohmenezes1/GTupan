@@ -1,0 +1,13 @@
+global:
+  resolve_timeout: 1m
+route:
+  group_by: ['alertname', 'job']
+  group_wait: 5s
+  group_interval: 10s
+  repeat_interval: 1m
+  receiver: 'rocket'
+receivers:
+- name: 'rocket'
+  webhook_configs:
+  - url: 'http://rocketchat:4000/hooks/641f66a25a4c818e937beec0/H2KADnm2CHpq4SySsCTRYAihCeXE35nuMxBTNDG8Q82tRr5E'
+    send_resolved: true

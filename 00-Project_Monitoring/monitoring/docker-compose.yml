@@ -1,0 +1,103 @@
+version: '3.7'
+volumes:
+  grafana-data: { driver: local }
+  netdataconfig:  { driver: local }
+  netdatalib:  { driver: local }
+  netdatacache:  { driver: local }
+
+services:
+  prometheus:
+   # Run Container as root user
+    user: root
+    image: prom/prometheus:latest
+    container_name: prometheus
+    hostname: localhost
+    restart: always
+    ports:
+      - '9090:9090'
+   # Mount config file from local to Container
+    volumes:
+      - './prometheus/config:/config'
+      - './prometheus/data/prometheus:/prometheus/data'
+   # Container start CMD to load config file   
+    command:
+      - '--config.file=/config/prometheus.yml'
+      - '--web.enable-lifecycle'
+      
+  grafana:
+    user: root
+    image: grafana/grafana:latest
+    container_name: grafana
+    hostname: localhost
+    restart: always
+
+    ports:
+      - "${BIND_IP:-0.0.0.0}:${HOST_PORT:-3000}:${PORT:-3000}"
+    volumes:
+
+      - './grafana/data/grafana:/var/lib/grafana'
+    
+  node_exporter:
+    image: quay.io/prometheus/node-exporter:latest
+    container_name: node_exporter
+    command:
+      - '--path.rootfs=/host'
+    pid: host
+    restart: unless-stopped
+    volumes:
+      - '/:/host:ro,rslave'
+      
+  netdata:
+    image: netdata/netdata:latest
+    container_name: netdata
+    hostname: localhost
+    ports:
+      - 19999:19999
+    restart: unless-stopped
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - apparmor:unconfined
+    volumes:
+      - netdataconfig:/etc/netdata
+      - netdatalib:/var/lib/netdata
+      - netdatacache:/var/cache/netdata
+      - /etc/passwd:/host/etc/passwd:ro
+      - /etc/group:/host/etc/group:ro
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /etc/os-release:/host/etc/os-release:ro
+
+  alertmanager:
+    # Run Container as root user
+    user: root
+    image: prom/alertmanager:latest
+    container_name: alertmanager
+    hostname: localhost
+    restart: always
+    ports:
+      - '9093:9093'
+   # Mount config file from local to Container  
+    volumes:
+      - './prometheus/config:/config'
+      - './prometheus/data/alertmanager:/alertmanager/data'
+   # Container start CMD to load config file   
+    command:
+      - '--config.file=/config/alertmanager.yml'
+      
+  cadvisor:
+    # TODO: latest tag is not updated, check latest release https://github.com/google/cadvisor/releases 
+    image: gcr.io/cadvisor/cadvisor-amd64:v0.47.0    
+    container_name: cadvisor
+    ports:
+      - "8080:8080"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+    devices:
+      - /dev/kmsg
+    restart: unless-stopped
+    privileged: true

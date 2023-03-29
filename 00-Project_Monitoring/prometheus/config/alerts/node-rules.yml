@@ -1,0 +1,12 @@
+groups:
+
+   - name: NodeAlerts
+     rules:
+     - alert: Node_Offline
+       expr: up{instance="node_exporter:9100"} == 0
+       for: 1s
+       labels:
+         severity: warning
+       annotations:
+         summary: "Conexão perdida com o node_exporter"
+         description: "Offline\n  VALOR = {{ $value }}"
