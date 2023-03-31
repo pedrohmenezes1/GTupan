@@ -8,7 +8,7 @@
 
 ##### Repositório criado com intenção de apresentar tutoriais e documentações ao decorrer dos aprendizados adquiridos
 
-=============================================================
+======================================================
 
 ### 00-Projeto_Monitoramento
 #### Link:
