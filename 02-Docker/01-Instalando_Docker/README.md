@@ -72,6 +72,13 @@ O Docker Compose é uma ferramenta para definir e executar aplicativos Docker co
 ```bash
 sudo apt-get install docker-compose
 ```
+
+## Passo 7: Inicie o Docker e verifique se o serviço está em execução:
+```bash
+sudo systemctl start docker
+sudo systemctl enable docker
+sudo systemctl status docker
+```
 ## Conclusão
 
 Neste tutorial, você aprendeu como instalar o Docker em um sistema operacional Linux Ubuntu 22.04. Com o Docker instalado, você poderá criar e executar contêineres para executar seus aplicativos com mais segurança e portabilidade.

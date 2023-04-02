@@ -95,6 +95,17 @@ https://github.com/pedrohmenezes1/GTupan/tree/master/12-Windows_Exporter
 https://github.com/pedrohmenezes1/GTupan/tree/master/13-SNMP_Exporter
 ```
 
+### 14-Portainer
+#### Link:
+```bash
+https://github.com/pedrohmenezes1/GTupan/tree/master/14-Portainer
+```
+
+### 15-Kubernetes
+#### Link:
+```bash
+https://github.com/pedrohmenezes1/GTupan/tree/master/15-Kubernetes
+```
 ## ⭐**GitHub Estatísticas**
 
 <div align="center">
